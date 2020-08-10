@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import {
   Card as CardMaterial,
   Avatar as AvatarMaterial,
+  CardActions as CardActionsMaterial,
 } from '@material-ui/core';
 
 const DivMain = styled.div`
@@ -42,4 +43,17 @@ const InputDiv = styled.div`
   padding: 0 1em 1em 1em;
 `;
 
-export { DivMain, Card, Avatar, AvatarIcon, Hint, FormDiv, InputDiv };
+const CardActions = styled(CardActionsMaterial)`
+  padding: 0 1em 1em 1em;
+`;
+
+export {
+  DivMain,
+  Card,
+  Avatar,
+  AvatarIcon,
+  Hint,
+  FormDiv,
+  InputDiv,
+  CardActions,
+};
