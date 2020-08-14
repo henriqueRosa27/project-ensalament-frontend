@@ -1,9 +1,10 @@
-import { put, call } from 'redux-saga/effects';
+import { put, call, takeLatest } from 'redux-saga/effects';
 
 import login from '../../services/session';
 import { loginSuccess, loginFailure } from '../ducks/session/actions';
+import { SessionTypes } from '../ducks/session/types';
 
-export default function* load(data: any) {
+function* load(data: any) {
   try {
     const loginInfo = data.payload.data;
     const response = yield call(login, {
@@ -31,4 +32,8 @@ export default function* load(data: any) {
       yield put(loginFailure(error));
     }
   }
+}
+
+export default function* routerPermission() {
+  yield takeLatest(SessionTypes.LOGIN_REQUEST, load);
 }
