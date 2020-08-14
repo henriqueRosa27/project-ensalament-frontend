@@ -82,7 +82,12 @@ const DrawerPage: React.FC = () => {
         <Divider />
         <List>
           {ItemsList.map((item, index) => (
-            <ItemList label={item.label} icon={item.icon} key={index} />
+            <ItemList
+              label={item.label}
+              icon={item.icon}
+              key={index}
+              path={item.path}
+            />
           ))}
         </List>
       </Drawer>

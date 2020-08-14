@@ -17,7 +17,7 @@ const Routes: React.FC = () => {
           <Route
             component={({ match }: any) => (
               <>
-                <Route exact path="/" component={Home} />
+                <Route exact path="/" render={() => <Home />} />
                 <Route exact path="/predio" render={() => <Building />} />
               </>
             )}
