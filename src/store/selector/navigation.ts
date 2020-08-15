@@ -1,5 +1,6 @@
 import { IApplicationState } from '..';
 
-const drawerState = (state: IApplicationState) => state.navigation.drawer;
+const drawerState = (state: IApplicationState): boolean =>
+  state.navigation.drawer;
 
 export default drawerState;

@@ -20,6 +20,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const composeEnhancer =
   (process.env.NODE_ENV !== 'production' &&
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
   compose;
 

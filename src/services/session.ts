@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import axios from './api';
 import { SessionLogin } from '../store/ducks/session/types';
 

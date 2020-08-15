@@ -15,7 +15,7 @@ const Routes: React.FC = () => {
         <Route exact path="/login" component={Login} />
         <Content>
           <Route
-            component={({ match }: any) => (
+            component={() => (
               <>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/predio" render={() => <Building />} />
