@@ -87,6 +87,7 @@ const DrawerPage: React.FC = () => {
               icon={item.icon}
               // eslint-disable-next-line react/no-array-index-key
               key={index + item.path}
+              path={item.path}
             />
           ))}
         </List>

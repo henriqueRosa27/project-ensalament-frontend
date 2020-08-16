@@ -16,7 +16,7 @@ const itemsList: Array<ItemList> = [
   },
   {
     label: 'Prédios',
-    path: '/',
+    path: '/predio',
     icon: <BusinessIcon />,
   },
 ];
