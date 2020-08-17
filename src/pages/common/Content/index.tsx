@@ -1,41 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { Container } from '@material-ui/core';
-import clsx from 'clsx';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
-import drawerState from '../../../store/selector/navigation';
 import Navbar from '../Navbar';
 import DrawerPage from '../Drawer';
 
-const drawerWidth = 240;
-
 const useStyles = makeStyles((theme: Theme) => ({
-  content: {
-    marginBottom: 20,
-    minHeight: 'calc(100vh - 20px)',
-    flexGrow: 1,
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: -drawerWidth,
-    },
-    background: 'rgb(249, 249, 252)',
+  root: {
+    display: 'flex',
   },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: '0px !important',
+  content: {
+    flexGrow: 1,
+    height: '100vh',
+    overflow: 'auto',
   },
   appBarSpacer: theme.mixins.toolbar,
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
 }));
 
 interface ContentProps {
@@ -45,23 +24,16 @@ interface ContentProps {
 const Content: React.FC<ContentProps> = ({ children }: ContentProps) => {
   const classes = useStyles();
 
-  const drawerIsOpen = useSelector(drawerState);
-
   return (
-    <>
+    <div className={classes.root}>
+      <CssBaseline />
       <Navbar />
       <DrawerPage />
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: drawerIsOpen,
-        })}
-      >
+      <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          {children}
-        </Container>
+        {children}
       </main>
-    </>
+    </div>
   );
 };
 

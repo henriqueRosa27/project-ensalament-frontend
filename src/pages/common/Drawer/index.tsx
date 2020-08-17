@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 
 import drawerState from '../../../store/selector/navigation';
@@ -15,10 +14,6 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      display: 'flex',
-    },
-
     hide: {
       display: 'none',
     },
@@ -62,37 +57,33 @@ const DrawerPage: React.FC = () => {
   const drawerIsOpen = useSelector(drawerState);
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
+    <Drawer
+      variant="permanent"
+      className={clsx(classes.drawer, {
+        [classes.drawerOpen]: drawerIsOpen,
+        [classes.drawerClose]: !drawerIsOpen,
+      })}
+      classes={{
+        paper: clsx({
           [classes.drawerOpen]: drawerIsOpen,
           [classes.drawerClose]: !drawerIsOpen,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: drawerIsOpen,
-            [classes.drawerClose]: !drawerIsOpen,
-          }),
-        }}
-      >
-        <div className={classes.toolbar} />
-        <Divider />
-        <List>
-          {ItemsList.map((item, index) => (
-            <ItemList
-              label={item.label}
-              icon={item.icon}
-              // eslint-disable-next-line react/no-array-index-key
-              key={index + item.path}
-              path={item.path}
-            />
-          ))}
-        </List>
-      </Drawer>
-    </div>
+        }),
+      }}
+    >
+      <div className={classes.toolbar} />
+      <Divider />
+      <List>
+        {ItemsList.map((item, index) => (
+          <ItemList
+            label={item.label}
+            icon={item.icon}
+            // eslint-disable-next-line react/no-array-index-key
+            key={index + item.path}
+            path={item.path}
+          />
+        ))}
+      </List>
+    </Drawer>
   );
 };
 

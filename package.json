@@ -21,6 +21,7 @@
     "connected-react-router": "^6.8.0",
     "final-form": "^4.20.1",
     "history": "4.10.1",
+    "material-table": "^1.68.1",
     "mui-rff": "^2.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

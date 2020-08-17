@@ -6,7 +6,7 @@ import history from './history';
 import Login from '../pages/Login';
 import Content from '../pages/common/Content';
 import Home from '../pages/Home';
-import Building from '../pages/Building';
+import { BuildingList, BuildingForm } from '../pages/Building';
 
 const Routes: React.FC = () => {
   return (
@@ -18,7 +18,8 @@ const Routes: React.FC = () => {
             component={() => (
               <>
                 <Route exact path="/" render={() => <Home />} />
-                <Route exact path="/predio" render={() => <Building />} />
+                <Route exact path="/predio" render={() => <BuildingList />} />
+                <Route exact path="/criar" render={() => <BuildingForm />} />
               </>
             )}
           />
