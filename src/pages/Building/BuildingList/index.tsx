@@ -1,15 +1,43 @@
 import React from 'react';
 import { Container, makeStyles, Theme } from '@material-ui/core';
+import { IDataTableColumn } from 'react-data-table-component';
 
 import { DataTableComponent } from '../../../components';
-import DataTableMoldel from '../../../Models/DataTable';
 import BuildingModel from '../../../Models/Building';
 
-const Columns: Array<DataTableMoldel> = [
-  { title: 'Nome', field: 'name', type: 'string' },
+const Columns: Array<IDataTableColumn> = [
   {
-    title: 'Ativo',
-    field: 'status',
+    name: 'Id',
+    selector: 'id',
+    sortable: true,
+    omit: true,
+  },
+  {
+    name: 'Nome',
+    selector: 'name',
+    sortable: true,
+  },
+  {
+    name: 'Status',
+    selector: 'status',
+    sortable: true,
+    cell: (row: any) => (row.status ? 'Ativo' : 'Inativo'),
+  },
+  {
+    name: '',
+    cell: () => (
+      <button
+        type="button"
+        onClick={() => {
+          console.log('teste');
+        }}
+      >
+        Action
+      </button>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
   },
 ];
 
@@ -41,18 +69,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Building: React.FC = () => {
   const classes = useStyles();
 
-  const onEdit = (teste: any) => {
-    console.log(teste);
-  };
-
   return (
     <Container className={classes.container}>
-      <DataTableComponent
-        title="Prédios"
-        columns={Columns}
-        data={Data}
-        onEdit={onEdit}
-      />
+      <DataTableComponent title="Prédios" columns={Columns} data={Data} />
     </Container>
   );
 };
