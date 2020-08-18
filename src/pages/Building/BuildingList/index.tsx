@@ -1,7 +1,16 @@
 import React from 'react';
-import { Container, makeStyles, Theme } from '@material-ui/core';
+import {
+  Container,
+  makeStyles,
+  Theme,
+  Button,
+  IconButton,
+} from '@material-ui/core';
 import { IDataTableColumn } from 'react-data-table-component';
+import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
 
+import history from '../../../routes/history';
 import { DataTableComponent } from '../../../components';
 import BuildingModel from '../../../Models/Building';
 
@@ -24,17 +33,19 @@ const Columns: Array<IDataTableColumn> = [
     cell: (row: any) => (row.status ? 'Ativo' : 'Inativo'),
   },
   {
-    name: '',
-    cell: () => (
-      <button
-        type="button"
+    name: 'Ações',
+    cell: (row) => (
+      <IconButton
+        aria-label="delete"
+        color="inherit"
         onClick={() => {
-          console.log('teste');
+          console.log(row);
         }}
       >
-        Action
-      </button>
+        <EditIcon />
+      </IconButton>
     ),
+    sortable: false,
     ignoreRowClick: true,
     allowOverflow: true,
     button: true,
@@ -66,12 +77,30 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+const actions = (
+  <Button
+    variant="outlined"
+    color="primary"
+    startIcon={<AddIcon />}
+    onClick={() => {
+      history.push('predio/criar');
+    }}
+  >
+    Adicionar
+  </Button>
+);
+
 const Building: React.FC = () => {
   const classes = useStyles();
 
   return (
     <Container className={classes.container}>
-      <DataTableComponent title="Prédios" columns={Columns} data={Data} />
+      <DataTableComponent
+        title="Prédios"
+        columns={Columns}
+        data={Data}
+        actions={actions}
+      />
     </Container>
   );
 };

@@ -19,7 +19,11 @@ const Routes: React.FC = () => {
               <>
                 <Route exact path="/" render={() => <Home />} />
                 <Route exact path="/predio" render={() => <BuildingList />} />
-                <Route exact path="/criar" render={() => <BuildingForm />} />
+                <Route
+                  exact
+                  path="/predio/criar"
+                  render={() => <BuildingForm />}
+                />
               </>
             )}
           />

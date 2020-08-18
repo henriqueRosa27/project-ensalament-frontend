@@ -12,6 +12,7 @@ import {
 import { Menu, ExitToAppOutlined } from '@material-ui/icons';
 
 import { toogleDrawer } from '../../../store/ducks/navigation/actions';
+import { logoutRequest } from '../../../store/ducks/session/actions';
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
@@ -59,6 +60,10 @@ const Navbar: React.FC = () => {
 
   const dispatch = useDispatch();
 
+  const logout = () => {
+    dispatch(logoutRequest());
+  };
+
   return (
     <>
       <AppBar position="fixed" className={classes.appBar}>
@@ -85,6 +90,7 @@ const Navbar: React.FC = () => {
               variant="extended"
               color="default"
               className={classes.button}
+              onClick={logout}
             >
               Sair
               <ExitToAppOutlined className={classes.userIcon} />

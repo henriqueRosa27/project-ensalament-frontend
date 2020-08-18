@@ -5,6 +5,8 @@ export enum SessionTypes {
   LOGIN_REQUEST = '@session/LOGIN_REQUEST',
   LOGIN_SUCCCES = '@session/LOGIN_SUCCCES',
   LOGIN_FAILURE = '@session/LOGIN_FAILURE',
+  LOGOUT_REQUEST = '@session/LOGOUT_REQUEST',
+  LOGOUT_SUCCCES = '@session/LOGOUT_SUCCCES',
 }
 
 /**
@@ -32,4 +34,5 @@ export interface SessionState {
   readonly role: string;
   readonly errors: [];
   readonly error: string;
+  readonly isAutenticate: boolean;
 }

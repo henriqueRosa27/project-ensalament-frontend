@@ -34,8 +34,8 @@ const schema = Yup.object().shape({
     .email('Informe um e-mail válido'),
   password: Yup.string()
     .required('Campo obrigatório')
-    .min(8, 'Campo obrigatório')
-    .max(16, 'Campo obrigatório'),
+    .min(8, 'Minímo de 8 caracteres')
+    .max(16, 'Máximo de 16 caracteres'),
 });
 
 const validate = async (
@@ -74,7 +74,7 @@ const Login: React.FC = () => {
                   <LockIcon />
                 </AvatarIcon>
               </Avatar>
-              <Hint>Hint: demo / demo</Hint>
+              <Hint>Ensalamento/Demo</Hint>
 
               <FormDiv>
                 <InputDiv>

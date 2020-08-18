@@ -10,3 +10,7 @@ export const loginSuccess = (data: Session) =>
 
 export const loginFailure = (data: [] | string) =>
   action(SessionTypes.LOGIN_FAILURE, { data });
+
+export const logoutRequest = () => action(SessionTypes.LOGOUT_REQUEST);
+
+export const logoutSuccess = () => action(SessionTypes.LOGOUT_SUCCCES);

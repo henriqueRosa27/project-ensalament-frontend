@@ -1,11 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { ReactNode } from 'react';
 import DataTable, { IDataTableColumn } from 'react-data-table-component';
 
 interface DataTableComponent {
   title: string;
   columns: Array<IDataTableColumn>;
   data: Array<any>;
+  actions?: ReactNode;
 }
 
 const customStyles = {
@@ -40,7 +41,7 @@ const teste = [
     style: {
       color: '#202124',
       '&:hover': {
-        backgroundColor: 'rgba(23,200,23,0.50)',
+        backgroundColor: 'rgba(23,200,23,0.05)',
       },
     },
   },
@@ -49,7 +50,7 @@ const teste = [
     style: {
       color: '#202124',
       '&:hover': {
-        backgroundColor: 'rgba(200,23,23,0.5)',
+        backgroundColor: 'rgba(200,23,23,0.05)',
       },
     },
   },
@@ -59,10 +60,12 @@ const DataTableComponent: React.FC<DataTableComponent> = ({
   title,
   columns,
   data,
+  actions,
 }: DataTableComponent) => {
   return (
     <div style={{ maxWidth: '100%' }}>
       <DataTable
+        actions={actions}
         title={title}
         columns={columns}
         customStyles={customStyles}
@@ -75,4 +78,9 @@ const DataTableComponent: React.FC<DataTableComponent> = ({
     </div>
   );
 };
+
+DataTableComponent.defaultProps = {
+  actions: null,
+};
+
 export default DataTableComponent;
