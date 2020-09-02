@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import axios from './api';
+import { login as axiosLogin } from './api';
 import { SessionLogin } from '../store/ducks/session/types';
 
 export default function login(data: SessionLogin) {
-  return axios.post('auth/login', { ...data });
+  return axiosLogin.post('auth/login', { ...data });
 }

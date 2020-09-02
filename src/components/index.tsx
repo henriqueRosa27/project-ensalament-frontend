@@ -1,5 +1,4 @@
 import DataTableComponent from './DataTableComponent';
+import FormComponent from './FormComponent';
 
-const t = ['', ''];
-
-export { DataTableComponent, t };
+export { DataTableComponent, FormComponent };

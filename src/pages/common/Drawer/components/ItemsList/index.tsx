@@ -1,6 +1,11 @@
 import React, { ReactNode } from 'react';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import BusinessIcon from '@material-ui/icons/Business';
+import {
+  Dashboard,
+  Business,
+  HomeWork,
+  School,
+  Class,
+} from '@material-ui/icons';
 
 interface ItemList {
   label: string;
@@ -12,12 +17,27 @@ const itemsList: Array<ItemList> = [
   {
     label: 'Home',
     path: '/',
-    icon: <DashboardIcon />,
+    icon: <Dashboard />,
   },
   {
     label: 'Prédios',
     path: '/predio',
-    icon: <BusinessIcon />,
+    icon: <Business />,
+  },
+  {
+    label: 'Salas',
+    path: '/sala',
+    icon: <HomeWork />,
+  },
+  {
+    label: 'Cursos',
+    path: '/curso',
+    icon: <School />,
+  },
+  {
+    label: 'Turmas',
+    path: '/turma',
+    icon: <Class />,
   },
 ];
 

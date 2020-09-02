@@ -1,19 +1,19 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { ReactNode } from 'react';
 import DataTable, { IDataTableColumn } from 'react-data-table-component';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 interface DataTableComponent {
   title: string;
   columns: Array<IDataTableColumn>;
   data: Array<any>;
   actions?: ReactNode;
+  isLoading: boolean;
 }
 
 const customStyles = {
   headRow: {
-    style: {
-      border: 'none',
-    },
+    style: {},
   },
   headCells: {
     style: {
@@ -35,9 +35,9 @@ const customStyles = {
   },
 };
 
-const teste = [
+const customStylesRows = [
   {
-    when: (row: any) => row.status,
+    when: (row: any) => row.active,
     style: {
       color: '#202124',
       '&:hover': {
@@ -46,7 +46,7 @@ const teste = [
     },
   },
   {
-    when: (row: any) => !row.status,
+    when: (row: any) => !row.active,
     style: {
       color: '#202124',
       '&:hover': {
@@ -56,11 +56,18 @@ const teste = [
   },
 ];
 
+const Circular = () => (
+  <div style={{ padding: '24px' }}>
+    <CircularProgress size={75} />
+  </div>
+);
+
 const DataTableComponent: React.FC<DataTableComponent> = ({
   title,
   columns,
   data,
   actions,
+  isLoading,
 }: DataTableComponent) => {
   return (
     <div style={{ maxWidth: '100%' }}>
@@ -69,11 +76,14 @@ const DataTableComponent: React.FC<DataTableComponent> = ({
         title={title}
         columns={columns}
         customStyles={customStyles}
-        conditionalRowStyles={teste}
+        conditionalRowStyles={customStylesRows}
         data={data}
-        defaultSortField="name"
         fixedHeaderScrollHeight="300px"
         highlightOnHover
+        progressPending={isLoading}
+        progressComponent={<Circular />}
+        persistTableHead
+        noDataComponent="Sem Registros"
       />
     </div>
   );

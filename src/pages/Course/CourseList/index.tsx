@@ -4,12 +4,12 @@ import AddIcon from '@material-ui/icons/Add';
 
 import history from '../../../routes/history';
 import { DataTableComponent } from '../../../components';
-import BuildingModel from '../../../models/Building';
+import CourseModel from '../../../models/Course';
 import {
-  getBuildings,
-  deleteBuilding,
-  reactiveBuilding,
-} from '../../../services/building';
+  getCourses,
+  deleteCourse,
+  reactiveCourse,
+} from '../../../services/course';
 import Columns from './Columns';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -25,7 +25,7 @@ const actions = (
     color="primary"
     startIcon={<AddIcon />}
     onClick={() => {
-      history.push('predio/criar');
+      history.push('curso/criar');
     }}
   >
     Adicionar
@@ -35,18 +35,17 @@ const actions = (
 const Building: React.FC = () => {
   const classes = useStyles();
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<BuildingModel[]>([]);
+  const [data, setData] = useState<CourseModel[]>([]);
 
   useEffect(() => {
     const teste = async () => {
       setLoading(true);
       try {
-        const responseData = await getBuildings();
+        const responseData = await getCourses();
         setData(responseData);
         setLoading(false);
       } catch (e) {
         console.log(e);
-
         setLoading(false);
       }
     };
@@ -64,12 +63,12 @@ const Building: React.FC = () => {
     setData(newData);
   };
 
-  const onChangeSwitch = async (row: BuildingModel) => {
+  const onChangeSwitch = async (row: CourseModel) => {
     try {
       if (row.active) {
-        await deleteBuilding(row.id!);
+        await deleteCourse(row.id!);
       } else {
-        await reactiveBuilding(row.id!);
+        await reactiveCourse(row.id!);
       }
       changeStatusData(row.id!, !row.active);
     } catch (e) {
@@ -82,7 +81,7 @@ const Building: React.FC = () => {
   return (
     <Container className={classes.container}>
       <DataTableComponent
-        title="Prédios"
+        title="Cursos"
         columns={columns}
         data={data}
         actions={actions}

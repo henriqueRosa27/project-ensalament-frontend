@@ -10,8 +10,7 @@ import { loginSuccess } from '../ducks/session/actions';
 function* sagaNavigation(data: any) {
   try {
     const token = getToken();
-    console.log(!token);
-    console.log(data.payload.location.pathname);
+
     if (!token && data.payload.location.pathname !== '/login') {
       yield history.push('/login');
     }

@@ -7,17 +7,17 @@ import { useParams } from 'react-router-dom';
 
 import { FormComponent } from '../../../components';
 import {
-  getBuildingById,
-  createBuilding,
-  updateBuilding,
-} from '../../../services/building';
+  getCourseById,
+  createCourse,
+  updateCourse,
+} from '../../../services/course';
 import history from '../../../routes/history';
 
-interface BuildingFormvalues {
+interface CourseFormvalues {
   name?: string;
 }
 
-const { Form } = withTypes<BuildingFormvalues>();
+const { Form } = withTypes<CourseFormvalues>();
 
 const schema = Yup.object().shape({
   name: Yup.string()
@@ -30,17 +30,17 @@ const BuildingForm: React.FC = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [dataForm, setDataForm] = useState<BuildingFormvalues>({ name: '' });
+  const [dataForm, setDataForm] = useState<CourseFormvalues>({ name: '' });
 
-  const onSubmit = async (data: BuildingFormvalues) => {
+  const onSubmit = async (data: CourseFormvalues) => {
     setSubmitting(true);
     try {
       if (id) {
-        await updateBuilding(id, data.name || '');
+        await updateCourse(id, data.name || '');
       } else {
-        await createBuilding(data.name || '');
+        await createCourse(data.name || '');
       }
-      history.push('/predio');
+      history.push('/curso');
     } catch (e) {
       console.log(e);
     } finally {
@@ -52,7 +52,7 @@ const BuildingForm: React.FC = () => {
     const getBuilding = async () => {
       try {
         setLoading(true);
-        const responseData = await getBuildingById(id);
+        const responseData = await getCourseById(id);
         setDataForm(responseData);
       } catch (e) {
         console.log(e.response);
@@ -67,7 +67,7 @@ const BuildingForm: React.FC = () => {
 
   return (
     <FormComponent
-      title={`${id ? 'Alterar' : 'Criar'} Prédio`}
+      title={`${id ? 'Alterar' : 'Criar'} Curso`}
       textButtonSubmit={id ? 'Alterar' : 'Criar'}
       FormProp={Form}
       schema={schema}
@@ -89,7 +89,7 @@ const BuildingForm: React.FC = () => {
           name="name"
           margin="normal"
           variant="filled"
-          placeholder="Nome do Prédio"
+          placeholder="Nome do Curso"
           fullWidth
           required
         />

@@ -6,18 +6,14 @@ import * as Yup from 'yup';
 import { useParams } from 'react-router-dom';
 
 import { FormComponent } from '../../../components';
-import {
-  getBuildingById,
-  createBuilding,
-  updateBuilding,
-} from '../../../services/building';
+import { getTeamById, createTeam, updateTeam } from '../../../services/team';
 import history from '../../../routes/history';
 
-interface BuildingFormvalues {
+interface TeamFormvalues {
   name?: string;
 }
 
-const { Form } = withTypes<BuildingFormvalues>();
+const { Form } = withTypes<TeamFormvalues>();
 
 const schema = Yup.object().shape({
   name: Yup.string()
@@ -30,17 +26,17 @@ const BuildingForm: React.FC = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [dataForm, setDataForm] = useState<BuildingFormvalues>({ name: '' });
+  const [dataForm, setDataForm] = useState<TeamFormvalues>({ name: '' });
 
-  const onSubmit = async (data: BuildingFormvalues) => {
+  const onSubmit = async (data: TeamFormvalues) => {
     setSubmitting(true);
     try {
       if (id) {
-        await updateBuilding(id, data.name || '');
+        await updateTeam(id, data.name || '');
       } else {
-        await createBuilding(data.name || '');
+        await createTeam(data.name || '');
       }
-      history.push('/predio');
+      history.push('/turma');
     } catch (e) {
       console.log(e);
     } finally {
@@ -52,7 +48,7 @@ const BuildingForm: React.FC = () => {
     const getBuilding = async () => {
       try {
         setLoading(true);
-        const responseData = await getBuildingById(id);
+        const responseData = await getTeamById(id);
         setDataForm(responseData);
       } catch (e) {
         console.log(e.response);
@@ -67,7 +63,7 @@ const BuildingForm: React.FC = () => {
 
   return (
     <FormComponent
-      title={`${id ? 'Alterar' : 'Criar'} Prédio`}
+      title={`${id ? 'Alterar' : 'Criar'} Turma`}
       textButtonSubmit={id ? 'Alterar' : 'Criar'}
       FormProp={Form}
       schema={schema}
