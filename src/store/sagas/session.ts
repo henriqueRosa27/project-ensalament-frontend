@@ -16,7 +16,7 @@ function* load(data: any) {
   try {
     const loginInfo = data.payload.data;
 
-    const response = yield call(login, {
+    const response: { data: any } = yield call(login, {
       email: loginInfo.email,
       password: loginInfo.password,
     });

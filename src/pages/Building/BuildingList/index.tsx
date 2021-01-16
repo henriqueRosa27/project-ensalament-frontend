@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, makeStyles, Theme, Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import { toast } from 'react-toastify';
 
 import history from '../../../routes/history';
 import { DataTableComponent } from '../../../components';
@@ -45,8 +46,8 @@ const Building: React.FC = () => {
         setData(responseData);
         setLoading(false);
       } catch (e) {
-        console.log(e);
-
+        console.log(await e);
+        toast.error(<h1>teste</h1>);
         setLoading(false);
       }
     };

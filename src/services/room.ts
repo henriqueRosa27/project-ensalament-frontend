@@ -13,10 +13,14 @@ const getRoomById = async (id: number): Promise<RoomModel> => {
 
 const createRoom = async (
   name: string,
+  capacity: number,
+  isLab: boolean,
   buildingId: number
 ): Promise<RoomModel> => {
   const response = await axiosAutenticanted.post('room', {
     name,
+    capacity,
+    is_lab: isLab,
     building_id: buildingId,
   });
   return response.data;
@@ -25,10 +29,14 @@ const createRoom = async (
 const updateRoom = async (
   id: number,
   name: string,
+  capacity: number,
+  isLab: boolean,
   buildingId: number
 ): Promise<RoomModel> => {
   const response = await axiosAutenticanted.put(`room/${id}`, {
     name,
+    capacity,
+    is_lab: isLab,
     building_id: buildingId,
   });
   return response.data;

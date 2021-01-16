@@ -3,6 +3,7 @@ import { NavigationState, NavigationTypes } from './types';
 
 const INITIAL_STATE: NavigationState = {
   drawer: true,
+  backdrop: false,
 };
 
 const reducer: Reducer<NavigationState> = (state = INITIAL_STATE, action) => {
@@ -18,6 +19,19 @@ const reducer: Reducer<NavigationState> = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         drawer: true,
+      };
+
+    case NavigationTypes.TOOGLE_BACKDROP:
+      return { ...state, drawer: !state.backdrop };
+    case NavigationTypes.CLOSE_BACKDROP:
+      return {
+        ...state,
+        backdrop: false,
+      };
+    case NavigationTypes.OPEN_BACKDROP:
+      return {
+        ...state,
+        backdrop: true,
       };
     default:
       return state;

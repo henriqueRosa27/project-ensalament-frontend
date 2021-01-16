@@ -8,11 +8,15 @@ import { StepIconProps } from '@material-ui/core/StepIcon';
 import InfoIcon from '@material-ui/icons/Info';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 
+import DataPage from './Data';
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
       width: '100%',
+      alignItems: 'center',
+      flexDirection: 'column',
       paddingTop: theme.spacing(5),
       paddingRight: theme.spacing(5),
       paddingLeft: theme.spacing(5),
@@ -83,7 +87,7 @@ export default function VerticalLinearStepper() {
   return (
     <div className={classes.root}>
       <div className={classes.div1}>
-        <Stepper nonLinear activeStep={activeStep}>
+        <Stepper nonLinear activeStep={activeStep} style={{ minWidth: 400 }}>
           <Step>
             <StepButton
               onClick={() => {
@@ -106,6 +110,8 @@ export default function VerticalLinearStepper() {
           </Step>
         </Stepper>
       </div>
+
+      {activeStep === 0 ? <DataPage /> : <h1>TESTE</h1>}
     </div>
   );
 }

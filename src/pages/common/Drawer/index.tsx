@@ -6,7 +6,7 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 
-import drawerState from '../../../store/selector/navigation';
+import { drawerState } from '../../../store/selector/navigation';
 import ItemList from './components/ItemList';
 import ItemsList from './components/ItemsList';
 

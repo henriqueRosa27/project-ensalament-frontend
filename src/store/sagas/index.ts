@@ -1,9 +1,8 @@
-import { all } from 'redux-saga/effects';
+import { all, AllEffect } from 'redux-saga/effects';
 
 import sessionSagas from './session';
 import routeSagas from './route';
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export default function* rootSaga() {
+export default function* rootSaga(): unknown {
   return yield all([sessionSagas(), routeSagas()]);
 }
