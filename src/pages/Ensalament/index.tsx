@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepButton from '@material-ui/core/StepButton';
-import StepLabel from '@material-ui/core/StepLabel';
+import {
+  Stepper,
+  Container,
+  StepLabel,
+  StepButton,
+  Step,
+} from '@material-ui/core';
 import { StepIconProps } from '@material-ui/core/StepIcon';
 import InfoIcon from '@material-ui/icons/Info';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 
-import DataPage from './Data';
+import Data from './components/Data';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,14 +21,9 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       flexDirection: 'column',
       paddingTop: theme.spacing(5),
+      paddingBottom: theme.spacing(5),
       paddingRight: theme.spacing(5),
       paddingLeft: theme.spacing(5),
-    },
-    div1: {
-      width: '100%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
     },
 
     button: {
@@ -85,33 +83,29 @@ export default function VerticalLinearStepper() {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <div className={classes.root}>
-      <div className={classes.div1}>
-        <Stepper nonLinear activeStep={activeStep} style={{ minWidth: 400 }}>
-          <Step>
-            <StepButton
-              onClick={() => {
-                setActiveStep(0);
-              }}
-            >
-              <StepLabel StepIconComponent={ColorlibStepIcon}>Dados</StepLabel>
-            </StepButton>
-          </Step>
-          <Step>
-            <StepButton
-              onClick={() => {
-                setActiveStep(1);
-              }}
-            >
-              <StepLabel StepIconComponent={ColorlibStepIcon}>
-                Ensalamento
-              </StepLabel>
-            </StepButton>
-          </Step>
-        </Stepper>
-      </div>
+    <Container className={classes.root}>
+      <Stepper nonLinear activeStep={activeStep} style={{ minWidth: 400 }}>
+        <Step>
+          <StepButton
+            onClick={() => {
+              setActiveStep(0);
+            }}>
+            <StepLabel StepIconComponent={ColorlibStepIcon}>Dados</StepLabel>
+          </StepButton>
+        </Step>
+        <Step>
+          <StepButton
+            onClick={() => {
+              setActiveStep(1);
+            }}>
+            <StepLabel StepIconComponent={ColorlibStepIcon}>
+              Ensalamento
+            </StepLabel>
+          </StepButton>
+        </Step>
+      </Stepper>
 
-      {activeStep === 0 ? <DataPage /> : <h1>TESTE</h1>}
-    </div>
+      {activeStep === 0 ? <Data /> : <h1>TESTE</h1>}
+    </Container>
   );
 }

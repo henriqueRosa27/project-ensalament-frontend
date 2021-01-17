@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import React, { useState } from 'react';
+import React from 'react';
 import { withTypes } from 'react-final-form';
 import { setIn } from 'final-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, CircularProgress } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
 import { TextField } from 'mui-rff';
@@ -15,8 +15,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { loginRequest } from '../../store/ducks/session/actions';
+import sessionData from '../../store/selector/session';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     height: '100vh',
   },
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -83,23 +84,22 @@ const validate = async (
 };
 
 const Login: React.FC = () => {
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const session = useSelector(sessionData);
   const classes = useStyles();
   const onSubmit = (auth: FormValues) => {
-    setLoading(true);
     dispatch(loginRequest({ email: auth.email!, password: auth.password! }));
   };
 
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={false} sm={4} md={8} className={classes.image} />
       <Grid
         item
         xs={12}
         sm={8}
-        md={5}
+        md={4}
         component={Paper}
         elevation={6}
         square
@@ -107,8 +107,7 @@ const Login: React.FC = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-        }}
-      >
+        }}>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockIcon />
@@ -118,7 +117,7 @@ const Login: React.FC = () => {
           </Typography>
           <Form
             onSubmit={onSubmit}
-            validate={(values) => validate(values, schema)}
+            validate={values => validate(values, schema)}
             render={({ handleSubmit }) => (
               <form noValidate onSubmit={handleSubmit}>
                 <TextField
@@ -131,8 +130,7 @@ const Login: React.FC = () => {
                   placeholder="Insira seu e-mail"
                   name="email"
                   autoComplete="email"
-                  autoFocus
-                  disabled={loading}
+                  disabled={session.loading}
                 />
                 <TextField
                   variant="outlined"
@@ -144,25 +142,23 @@ const Login: React.FC = () => {
                   placeholder="Insira sua senha"
                   type="password"
                   id="password"
-                  disabled={loading}
+                  disabled={session.loading}
                   autoComplete="current-password"
                 />
 
                 <Button
                   variant="contained"
                   type="submit"
+                  size="large"
                   color="primary"
-                  disabled={loading}
-                  fullWidth
-                >
-                  {loading && (
-                    <CircularProgress
-                      size={25}
-                      thickness={2}
-                      color="secondary"
-                    />
+                  disabled={session.loading}
+                  style={{ marginTop: 10 }}
+                  fullWidth>
+                  {session.loading ? (
+                    <CircularProgress size={25} thickness={10} />
+                  ) : (
+                    <>Login</>
                   )}
-                  Login
                 </Button>
               </form>
             )}

@@ -22,8 +22,7 @@ const actions = (
     startIcon={<AddIcon />}
     onClick={() => {
       history.push('sala/criar');
-    }}
-  >
+    }}>
     Adicionar
   </Button>
 );
@@ -48,8 +47,8 @@ const Building: React.FC = () => {
     teste();
   }, []);
 
-  const changeStatusData = (id: number, status: boolean) => {
-    const newData = data.map((building) => {
+  const changeStatusData = (id: string, status: boolean) => {
+    const newData = data.map(building => {
       if (building.id === id) {
         // eslint-disable-next-line no-param-reassign
         building.active = status;

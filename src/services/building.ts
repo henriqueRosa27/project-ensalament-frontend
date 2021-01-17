@@ -11,7 +11,7 @@ const getBuildingsActive = async (): Promise<BuildingModel[]> => {
   return response.data;
 };
 
-const getBuildingById = async (id: number): Promise<BuildingModel> => {
+const getBuildingById = async (id: string): Promise<BuildingModel> => {
   const response = await axiosAutenticanted.get(`building/${id}`);
   return response.data;
 };
@@ -22,19 +22,19 @@ const createBuilding = async (name: string): Promise<BuildingModel> => {
 };
 
 const updateBuilding = async (
-  id: number,
+  id: string,
   name: string
 ): Promise<BuildingModel> => {
   const response = await axiosAutenticanted.put(`building/${id}`, { name });
   return response.data;
 };
 
-const deleteBuilding = async (id: number): Promise<BuildingModel> => {
+const deleteBuilding = async (id: string): Promise<BuildingModel> => {
   const response = await axiosAutenticanted.delete(`building/${id}`);
   return response.data;
 };
 
-const reactiveBuilding = async (id: number): Promise<BuildingModel> => {
+const reactiveBuilding = async (id: string): Promise<BuildingModel> => {
   const response = await axiosAutenticanted.patch(`building/${id}`);
   return response.data;
 };

@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { ReactNode } from 'react';
 import DataTable, { IDataTableColumn } from 'react-data-table-component';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { CircularProgress, Avatar, Typography } from '@material-ui/core';
+import EmptyStateImage from '../../assets/images/EmptyState.png';
 
 interface DataTableComponent {
   title: string;
@@ -57,10 +58,37 @@ const customStylesRows = [
 ];
 
 const Circular = () => (
-  <div style={{ padding: '24px' }}>
+  <div style={{ marginTop: 40, marginBottom: 40, padding: '24px' }}>
     <CircularProgress size={75} />
   </div>
 );
+
+const EmptyState = () => {
+  return (
+    <div
+      style={{
+        marginTop: 40,
+        marginBottom: 40,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        maxWidth: 400,
+      }}>
+      <Avatar
+        alt="Remy Sharp"
+        src={EmptyStateImage}
+        style={{ height: 300, width: 300 }}
+      />
+      <Typography variant="h3" gutterBottom>
+        Sem registros!
+      </Typography>
+      <Typography variant="h5" gutterBottom align="center">
+        Para inserir um registro clique no botão &quot;Adicionar&quot;, no canto
+        superior direto.
+      </Typography>
+    </div>
+  );
+};
 
 const DataTableComponent: React.FC<DataTableComponent> = ({
   title,
@@ -83,7 +111,7 @@ const DataTableComponent: React.FC<DataTableComponent> = ({
         progressPending={isLoading}
         progressComponent={<Circular />}
         persistTableHead
-        noDataComponent="Sem Registros"
+        noDataComponent={<EmptyState />}
       />
     </div>
   );

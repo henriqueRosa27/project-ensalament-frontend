@@ -75,8 +75,7 @@ const Navbar: React.FC = () => {
               onClick={() => {
                 dispatch(toogleDrawer());
               }}
-              className={classes.hamburger}
-            >
+              className={classes.hamburger}>
               <Menu />
             </IconButton>
             <Typography variant="h6" noWrap>
@@ -90,8 +89,7 @@ const Navbar: React.FC = () => {
               variant="extended"
               color="default"
               className={classes.button}
-              onClick={logout}
-            >
+              onClick={logout}>
               Sair
               <ExitToAppOutlined className={classes.userIcon} />
             </Fab>

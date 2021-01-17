@@ -68,8 +68,7 @@ const DrawerPage: React.FC = () => {
           [classes.drawerOpen]: drawerIsOpen,
           [classes.drawerClose]: !drawerIsOpen,
         }),
-      }}
-    >
+      }}>
       <div className={classes.toolbar} />
       <Divider />
       <List>

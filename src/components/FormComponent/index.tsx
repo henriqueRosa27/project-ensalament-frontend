@@ -94,7 +94,7 @@ const Form: React.FC<FormComponentProps> = ({
 
           <FormProp
             onSubmit={onSubmit}
-            validate={(values) => validate(values, schema)}
+            validate={values => validate(values, schema)}
             initialValues={initialValues}
             render={({ handleSubmit }) => (
               <form noValidate onSubmit={handleSubmit}>
@@ -106,16 +106,14 @@ const Form: React.FC<FormComponentProps> = ({
                     disabled={submitting || loading}
                     onClick={() => {
                       history.goBack();
-                    }}
-                  >
+                    }}>
                     Voltar
                   </Button>
                   <Button
                     variant="contained"
                     color="primary"
                     type="submit"
-                    disabled={submitting || loading}
-                  >
+                    disabled={submitting || loading}>
                     {textButtonSubmit}
                   </Button>
                 </div>

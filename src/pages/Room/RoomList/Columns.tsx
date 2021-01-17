@@ -70,7 +70,7 @@ const Columns = (
   },
   {
     name: 'Prédio',
-    cell: (row) => <div>{row.building.name}</div>,
+    cell: row => <div>{row.building.name}</div>,
     sortable: true,
   },
   {
@@ -85,8 +85,7 @@ const Columns = (
       <>
         <Tooltip
           title={row.active ? 'Inativar' : 'Ativar'}
-          aria-label={row.active ? 'inativar' : 'ativar'}
-        >
+          aria-label={row.active ? 'inativar' : 'ativar'}>
           <AntSwitch
             checked={row.active}
             onClick={() => {
@@ -100,8 +99,7 @@ const Columns = (
           color="inherit"
           onClick={() => {
             history.push(`sala/alterar/${row.id}`);
-          }}
-        >
+          }}>
           <EditIcon />
         </IconButton>
       </>

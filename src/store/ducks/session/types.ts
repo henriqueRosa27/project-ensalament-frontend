@@ -35,4 +35,5 @@ export interface SessionState {
   readonly errors: [];
   readonly error: string;
   readonly isAutenticate: boolean;
+  readonly loading: boolean;
 }

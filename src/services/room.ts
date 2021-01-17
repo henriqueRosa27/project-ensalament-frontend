@@ -6,7 +6,7 @@ const getRooms = async (): Promise<RoomModel[]> => {
   return response.data;
 };
 
-const getRoomById = async (id: number): Promise<RoomModel> => {
+const getRoomById = async (id: string): Promise<RoomModel> => {
   const response = await axiosAutenticanted.get(`room/${id}`);
   return response.data;
 };
@@ -15,7 +15,7 @@ const createRoom = async (
   name: string,
   capacity: number,
   isLab: boolean,
-  buildingId: number
+  buildingId: string
 ): Promise<RoomModel> => {
   const response = await axiosAutenticanted.post('room', {
     name,
@@ -27,11 +27,11 @@ const createRoom = async (
 };
 
 const updateRoom = async (
-  id: number,
+  id: string,
   name: string,
   capacity: number,
   isLab: boolean,
-  buildingId: number
+  buildingId: string
 ): Promise<RoomModel> => {
   const response = await axiosAutenticanted.put(`room/${id}`, {
     name,
@@ -42,12 +42,12 @@ const updateRoom = async (
   return response.data;
 };
 
-const deleteRoom = async (id: number): Promise<RoomModel> => {
+const deleteRoom = async (id: string): Promise<RoomModel> => {
   const response = await axiosAutenticanted.delete(`room/${id}`);
   return response.data;
 };
 
-const reactiveRoom = async (id: number): Promise<RoomModel> => {
+const reactiveRoom = async (id: string): Promise<RoomModel> => {
   const response = await axiosAutenticanted.patch(`room/${id}`);
   return response.data;
 };

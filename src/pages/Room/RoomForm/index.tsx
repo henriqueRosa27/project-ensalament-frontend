@@ -14,8 +14,12 @@ import BuildingModel from '../../../models/Building';
 interface RoomFormvalues {
   name?: string;
   capacity?: number;
-  building?: number;
+  building?: string;
   isLab?: boolean;
+}
+
+interface ParamTypes {
+  id: string;
 }
 
 const { Form } = withTypes<RoomFormvalues>();
@@ -32,16 +36,16 @@ const schema = Yup.object().shape({
 });
 
 const BuildingForm: React.FC = () => {
-  const { id } = useParams();
+  const { id } = useParams<ParamTypes>();
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [dataBuilding, setDataBuilding] = useState<Array<BuildingModel>>([]);
   const [dataForm, setDataForm] = useState<RoomFormvalues>({
     name: '',
     capacity: undefined,
     building: undefined,
     isLab: false,
   });
-  const [dataBuilding, setDataBuilding] = useState<Array<BuildingModel>>([]);
 
   const onSubmit = async (data: RoomFormvalues) => {
     setSubmitting(true);
@@ -105,8 +109,7 @@ const BuildingForm: React.FC = () => {
       onSubmit={onSubmit}
       initialValues={{ ...dataForm }}
       loading={loading}
-      submitting={submitting}
-    >
+      submitting={submitting}>
       {loading ? (
         <Skeleton
           variant="text"
@@ -156,16 +159,14 @@ const BuildingForm: React.FC = () => {
           name="building"
           fullWidth
           required
+          noOptionsText="Sem registros"
           placeholder="Prédio a qual a sala pertence"
           options={dataBuilding}
-          onChange={(event, value) => {
-            console.log(value);
-          }}
           value={dataBuilding.find(
-            (building) => building.id === dataForm.building
+            building => building.id === dataForm.building
           )}
-          getOptionValue={(option) => option.id}
-          getOptionLabel={(option) => option.name}
+          getOptionValue={option => option.id}
+          getOptionLabel={option => option.name}
           style={{
             marginBottom: 20,
           }}

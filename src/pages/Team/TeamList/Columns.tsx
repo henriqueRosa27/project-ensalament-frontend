@@ -70,8 +70,7 @@ const Columns = (
       <>
         <Tooltip
           title={row.active ? 'Inativar' : 'Ativar'}
-          aria-label={row.active ? 'inativar' : 'ativar'}
-        >
+          aria-label={row.active ? 'inativar' : 'ativar'}>
           <AntSwitch
             checked={row.active}
             onClick={() => {
@@ -85,8 +84,7 @@ const Columns = (
           color="inherit"
           onClick={() => {
             history.push(`turma/alterar/${row.id}`);
-          }}
-        >
+          }}>
           <EditIcon />
         </IconButton>
       </>

@@ -38,6 +38,7 @@ function* load(data: any) {
     history.push('/');
   } catch (err) {
     if (err.response.status === 400) {
+      console.log(err.response.data);
       let error: string | [];
       if (err.response.data.message) {
         error = err.response.data.message;
@@ -52,7 +53,7 @@ function* load(data: any) {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function* logout(data: any) {
   try {
-    removeToken();
+    yield call(removeToken);
     console.log('chamou remove token');
     yield put(logoutSuccess());
     console.log('chamou logout');

@@ -74,8 +74,7 @@ const BuildingForm: React.FC = () => {
       onSubmit={onSubmit}
       initialValues={{ ...dataForm }}
       loading={loading}
-      submitting={submitting}
-    >
+      submitting={submitting}>
       {loading ? (
         <Skeleton
           variant="rect"

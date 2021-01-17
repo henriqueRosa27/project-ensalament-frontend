@@ -9,16 +9,27 @@ const INITIAL_STATE: SessionState = {
   errors: [],
   error: '',
   isAutenticate: false,
+  loading: false,
 };
 
 const reducer: Reducer<SessionState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case SessionTypes.LOGIN_REQUEST:
+      return {
+        ...state,
+        errors: INITIAL_STATE.errors,
+        error: INITIAL_STATE.error,
+        isAutenticate: true,
+        ...action.payload.data,
+        loading: true,
+      };
     case SessionTypes.LOGIN_SUCCCES:
       return {
         ...state,
         errors: INITIAL_STATE.errors,
         error: INITIAL_STATE.error,
         isAutenticate: true,
+        loading: false,
         ...action.payload.data,
       };
     case SessionTypes.LOGIN_FAILURE: {
@@ -30,6 +41,7 @@ const reducer: Reducer<SessionState> = (state = INITIAL_STATE, action) => {
         ...state,
         ...INITIAL_STATE,
         ...errorRequest,
+        loading: false,
       };
     }
     case SessionTypes.LOGOUT_SUCCCES:

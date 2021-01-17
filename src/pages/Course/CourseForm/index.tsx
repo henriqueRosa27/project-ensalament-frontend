@@ -17,6 +17,10 @@ interface CourseFormvalues {
   name?: string;
 }
 
+interface ParamProps {
+  id: string;
+}
+
 const { Form } = withTypes<CourseFormvalues>();
 
 const schema = Yup.object().shape({
@@ -27,7 +31,7 @@ const schema = Yup.object().shape({
 });
 
 const BuildingForm: React.FC = () => {
-  const { id } = useParams();
+  const { id } = useParams<ParamProps>();
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [dataForm, setDataForm] = useState<CourseFormvalues>({ name: '' });
@@ -74,8 +78,7 @@ const BuildingForm: React.FC = () => {
       onSubmit={onSubmit}
       initialValues={{ ...dataForm }}
       loading={loading}
-      submitting={submitting}
-    >
+      submitting={submitting}>
       {loading ? (
         <Skeleton
           variant="rect"

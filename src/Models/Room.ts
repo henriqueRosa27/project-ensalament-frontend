@@ -5,6 +5,6 @@ export default interface Room {
   capacity: number;
   isLab: boolean;
   active: boolean;
-  id?: number;
+  id?: string;
   building: Building;
 }
