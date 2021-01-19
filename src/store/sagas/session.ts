@@ -1,6 +1,7 @@
 import { put, call, takeLatest } from 'redux-saga/effects';
 import jwtDecode from 'jwt-decode';
 
+import { api } from '../../services/api';
 import login from '../../services/session';
 import { setToken, removeToken } from '../../services/localStorage';
 import {
@@ -21,10 +22,14 @@ function* load(data: any) {
       password: loginInfo.password,
     });
 
-    setToken(response.data.token);
+    const { token } = response.data;
 
-    const dataJwt = jwtDecode(response.data.token);
+    setToken(token);
+
+    const dataJwt = jwtDecode(token);
     const { user }: any = dataJwt;
+
+    api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(
       loginSuccess({
@@ -53,6 +58,7 @@ function* load(data: any) {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function* logout(data: any) {
   try {
+    delete api.defaults.headers.Authorization;
     yield call(removeToken);
     console.log('chamou remove token');
     yield put(logoutSuccess());

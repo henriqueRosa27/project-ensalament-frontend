@@ -1,4 +1,4 @@
-import { autenticanted as axiosAutenticanted } from './api';
+import { api as axiosAutenticanted } from './api';
 import CourseModel from '../models/Course';
 
 const getCourses = async (): Promise<CourseModel[]> => {

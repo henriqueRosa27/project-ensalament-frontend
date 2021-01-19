@@ -45,7 +45,7 @@ const AntSwitch = withStyles((theme: Theme) =>
 )(Switch);
 
 const Columns = (
-  onChangeSwitch: (row: TeamModel) => void
+  onChangeSwitch: (row: any) => void
 ): Array<IDataTableColumn> => [
   {
     name: 'Id',

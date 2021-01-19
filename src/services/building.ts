@@ -1,4 +1,4 @@
-import { autenticanted as axiosAutenticanted } from './api';
+import { api as axiosAutenticanted } from './api';
 import BuildingModel from '../models/Building';
 
 const getBuildings = async (): Promise<BuildingModel[]> => {

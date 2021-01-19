@@ -5,7 +5,6 @@ import { ConnectedRouter } from 'connected-react-router';
 import history from './history';
 import Login from '../pages/Login';
 import Content from '../pages/Common/Content';
-import Home from '../pages/Home';
 import Ensalament from '../pages/Ensalament';
 import { BuildingList, BuildingForm } from '../pages/Building';
 import { RoomList, RoomForm } from '../pages/Room';

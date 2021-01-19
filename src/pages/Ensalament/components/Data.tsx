@@ -1,85 +1,68 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { TreeView, TreeItem } from '@material-ui/lab';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { Typography, Checkbox } from '@material-ui/core';
+
+import { Divider } from '@material-ui/core';
+import TreeView from './TreeView';
+import { useCourseDataSelects } from '../../../hooks/DataCourseSelectsContext';
+import { useBuildingDataSelects } from '../../../hooks/DataBuildingSelectsContext';
 
 const useStyles = makeStyles(theme =>
   createStyles({
     root: {
-      height: 240,
-      flexGrow: 1,
-      maxWidth: 400,
-    },
-    labelRoot: {
       display: 'flex',
-      alignItems: 'center',
-      padding: theme.spacing(0.5, 0),
-    },
-    labelIcon: {
-      marginRight: theme.spacing(1),
-    },
-    labelText: {
-      fontWeight: 'inherit',
-      flexGrow: 1,
-      marginRight: theme.spacing(5),
-    },
-    treeView: {
-      color: theme.palette.text.primary,
-      '&:hover > $content': {
-        backgroundColor: theme.palette.action.hover,
-      },
-      '&:focus > $content, &$selected > $content': {
-        backgroundColor: `var(--tree-view-bg-color, ${theme.palette.grey[400]})`,
-        color: 'var(--tree-view-color)',
-      },
-      '&:focus > $content $label, &:hover > $content $label, &$selected > $content $label': {
-        backgroundColor: 'transparent',
-      },
+      flexDirection: 'row',
     },
   })
 );
 
-export default function FileSystemNavigator() {
+const Data: FC = () => {
   const classes = useStyles();
 
+  const {
+    loading: loadingCourse,
+    data: dataCourse,
+    defaultExpanded: defaultExpandedCourse,
+    childrenSelecteds: childrenSelectedsCourse,
+    setDataSelectsChildren: setDataSelectsChildrenCourse,
+    fathersState: fathersStateCourse,
+    setFatherSelectsChildren: setFatherSelectsChildrenCourse,
+  } = useCourseDataSelects();
+
+  const {
+    loading: loadingBulding,
+    data: dataBulding,
+    defaultExpanded: defaultExpandedBuilding,
+    childrenSelecteds: childrenSelectedBuilding,
+    setDataSelectsChildren: setDataSelectsChildrenBuilding,
+    fathersState: fathersStateBuilding,
+    setFatherSelectsChildren: setFatherSelectsChildrenBuilding,
+  } = useBuildingDataSelects();
+
   return (
-    <TreeView
-      className={classes.treeView}
-      defaultCollapseIcon={<ExpandMoreIcon />}
-      defaultExpandIcon={<ChevronRightIcon />}>
-      <TreeItem
-        nodeId="1"
-        label={
-          <div className={classes.labelRoot}>
-            <Checkbox
-              defaultChecked
-              color="primary"
-              className={classes.labelIcon}
-              inputProps={{ 'aria-label': 'secondary checkbox' }}
-            />
-            <Typography variant="body1" className={classes.labelText}>
-              Turma 1
-            </Typography>
-            <Typography variant="body2" color="inherit">
-              123 Alunos
-            </Typography>
-          </div>
-        }>
-        <TreeItem nodeId="2" label="Calendar" />
-        <TreeItem nodeId="3" label="Chrome" />
-        <TreeItem nodeId="4" label="Webstorm" />
-      </TreeItem>
-      <TreeItem nodeId="5" label="Documents">
-        <TreeItem nodeId="10" label="OSS" />
-        <TreeItem nodeId="6" label="Material-UI">
-          <TreeItem nodeId="7" label="src">
-            <TreeItem nodeId="8" label="index.js" />
-            <TreeItem nodeId="9" label="tree-view.js" />
-          </TreeItem>
-        </TreeItem>
-      </TreeItem>
-    </TreeView>
+    <div className={classes.root}>
+      <TreeView
+        title="Turmas"
+        loading={loadingCourse}
+        data={dataCourse}
+        defaultExpanded={defaultExpandedCourse}
+        childrenSelecteds={childrenSelectedsCourse}
+        setDataSelectsChildren={setDataSelectsChildrenCourse}
+        fathersState={fathersStateCourse}
+        setFatherSelectsChildren={setFatherSelectsChildrenCourse}
+      />
+      <Divider orientation="vertical" flexItem />
+      <TreeView
+        title="Salas"
+        loading={loadingBulding}
+        data={dataBulding}
+        defaultExpanded={defaultExpandedBuilding}
+        childrenSelecteds={childrenSelectedBuilding}
+        setDataSelectsChildren={setDataSelectsChildrenBuilding}
+        fathersState={fathersStateBuilding}
+        setFatherSelectsChildren={setFatherSelectsChildrenBuilding}
+      />
+    </div>
   );
-}
+};
+
+export default Data;

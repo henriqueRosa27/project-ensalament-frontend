@@ -1,4 +1,4 @@
-import { autenticanted as axiosAutenticanted } from './api';
+import { api as axiosAutenticanted } from './api';
 import RoomModel from '../models/Room';
 
 const getRooms = async (): Promise<RoomModel[]> => {

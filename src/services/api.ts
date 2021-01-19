@@ -1,13 +1,9 @@
 import axios from 'axios';
-import { getToken } from './localStorage';
 
-const login = axios.create({
+const api = axios.create({
   baseURL: `http://localhost:3333/`,
 });
 
-const autenticanted = axios.create({
-  baseURL: `http://localhost:3333/`,
-  headers: { Authorization: `Bearer ${getToken()}` },
-});
+const autenticanted = {};
 
-export { login, autenticanted };
+export { api, autenticanted };
