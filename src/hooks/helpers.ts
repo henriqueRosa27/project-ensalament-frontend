@@ -47,7 +47,7 @@ const changeFatherState = (
       const { id } = father;
 
       push(
-        fathersState.filter(value => {
+        fathersState.map(value => {
           if (value.id === id) {
             return { ...value, state };
           }

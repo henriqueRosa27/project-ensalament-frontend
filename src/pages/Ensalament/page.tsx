@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import {
   Stepper,
@@ -7,13 +7,17 @@ import {
   StepButton,
   Step,
 } from '@material-ui/core';
-import { StepIconProps } from '@material-ui/core/StepIcon';
-import InfoIcon from '@material-ui/icons/Info';
-import ViewModuleIcon from '@material-ui/icons/ViewModule';
 
 import Data from './components/Data';
-import { useBuildingDataSelects } from '../../hooks/DataBuildingSelectsContext';
-import { useCourseDataSelects } from '../../hooks/DataCourseSelectsContext';
+import Ensalament from './components/Ensalament';
+import ColorlibStepIcon from './helpers';
+import OptionsWeekShift from './components/Options';
+import { useOptionWeekShift } from '../../hooks/GenerateEnsalamentContext';
+
+interface Data {
+  week: number | undefined;
+  shift: number | undefined;
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,58 +51,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const useColorlibStepIconStyles = makeStyles({
-  root: {
-    backgroundColor: '#ccc',
-    zIndex: 1,
-    color: '#fff',
-    width: 50,
-    height: 50,
-    display: 'flex',
-    borderRadius: '50%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  active: {
-    backgroundImage:
-      'linear-gradient( 136deg, rgb(151, 158, 196) 0%, rgb(111, 123, 191) 50%, rgb(63, 81, 181) 100%)',
-    boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
-  },
-  completed: {
-    backgroundImage:
-      'linear-gradient( 136deg, rgb(151, 158, 196) 0%, rgb(111, 123, 191) 50%, rgb(63, 81, 181) 100%)',
-  },
-});
-
-function ColorlibStepIcon(props: StepIconProps) {
-  const classes = useColorlibStepIconStyles();
-  const { active, icon } = props;
-
-  const { get: getCourse } = useCourseDataSelects();
-
-  const { get: getBuilding } = useBuildingDataSelects();
-
-  useEffect(() => {
-    getCourse();
-    getBuilding();
-  }, []);
-
-  const icons: { [index: string]: React.ReactElement } = {
-    1: <InfoIcon />,
-    2: <ViewModuleIcon />,
-  };
-
-  return (
-    <div className={[classes.root, active ? classes.active : {}].join(' ')}>
-      {icons[String(icon)]}
-    </div>
-  );
-}
-
 export default function VerticalLinearStepper() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
+
+  const { getData, data } = useOptionWeekShift();
+
+  const generateEnsalament = () => {
+    getData(() => {
+      setActiveStep(1);
+    });
+  };
 
   return (
     <Container className={classes.root}>
@@ -107,6 +70,7 @@ export default function VerticalLinearStepper() {
         activeStep={activeStep}
         style={{
           minWidth: 400,
+          width: '50%',
           borderRadius: 20,
           border: 'solid rgba(63, 81, 181, 0.4 )',
         }}>
@@ -121,7 +85,9 @@ export default function VerticalLinearStepper() {
         <Step>
           <StepButton
             onClick={() => {
-              setActiveStep(1);
+              if (activeStep === 1 || !!data.data) {
+                setActiveStep(1);
+              }
             }}>
             <StepLabel StepIconComponent={ColorlibStepIcon}>
               Ensalamento
@@ -129,9 +95,15 @@ export default function VerticalLinearStepper() {
           </StepButton>
         </Step>
       </Stepper>
-
+      <OptionsWeekShift
+        activeStep={activeStep}
+        onClickGenerate={generateEnsalament}
+        onClickClear={() => {
+          setActiveStep(0);
+        }}
+      />
       <div className={classes.content}>
-        {activeStep === 0 ? <Data /> : <h1>TESTE</h1>}
+        {activeStep === 0 ? <Data /> : <Ensalament />}
       </div>
     </Container>
   );

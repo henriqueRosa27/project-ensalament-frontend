@@ -25,7 +25,7 @@ interface DataCourseSelectsContextData {
   childrenSelecteds: string[];
   defaultExpanded: string[];
   fathersState: FatherState[];
-  get: () => void;
+  get: (week: number, shift: number) => void;
   setDataSelectsChildren: (id: string) => void;
   setFatherSelectsChildren: (id: string) => void;
 }
@@ -68,15 +68,16 @@ const DataCourseSelectsProvider: FC<DataCourseSelectsProviderProps> = ({
       id: t.id,
       state: 'none',
     }));
+
     setData(dataConverted);
     setDefaultExpanded(defaultExpandedData);
     setFathersState(stateFather);
   }
 
-  const get = useCallback(async () => {
+  const get = useCallback(async (week: number, shift: number) => {
     try {
       setLoading(true);
-      const dataCourses = await getCourses();
+      const dataCourses = await getCourses(week, shift);
       setCourses(dataCourses);
       convertData(dataCourses);
     } catch (e) {

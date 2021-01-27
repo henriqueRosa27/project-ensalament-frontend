@@ -11,6 +11,7 @@ interface TreeItemCheckboxProps {
   onClick: () => void;
   indeterminate?: boolean;
   disabled?: boolean;
+  nodeId: string;
 }
 
 const useStyles = makeStyles(theme =>
@@ -39,15 +40,17 @@ const TreeItemCheckbox: FC<TreeItemCheckboxProps> = ({
   onClick,
   indeterminate = false,
   disabled = false,
+  nodeId,
 }: TreeItemCheckboxProps) => {
   const classes = useStyles();
+
   return (
     <TreeItem
       onLabelClick={e => {
         e.preventDefault();
         onClick();
       }}
-      nodeId="1"
+      nodeId={nodeId}
       label={
         <div className={classes.labelRoot}>
           <Checkbox

@@ -25,7 +25,7 @@ interface DataBuildingSelectsContextData {
   childrenSelecteds: string[];
   defaultExpanded: string[];
   fathersState: FatherState[];
-  get: () => void;
+  get: (week: number, shift: number) => void;
   setDataSelectsChildren: (id: string) => void;
   setFatherSelectsChildren: (id: string) => void;
 }
@@ -79,15 +79,16 @@ const DataCourseSelectsProvider: FC<DataBuildingSelectsProviderProps> = ({
       id: t.id,
       state: 'none',
     }));
+
     setData(dataConverted);
     setDefaultExpanded(defaultExpandedData);
     setFathersState(stateFather);
   }
 
-  const get = useCallback(async () => {
+  const get = useCallback(async (week: number, shift: number) => {
     try {
       setLoading(true);
-      const dataBuilding = await getBuildings();
+      const dataBuilding = await getBuildings(week, shift);
       setBuildings(dataBuilding);
       convertData(dataBuilding);
     } catch (e) {

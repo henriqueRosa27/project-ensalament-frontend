@@ -9,6 +9,7 @@ import TreeItemCheckbox from './TreeItemCheckbox';
 import { DataInterface } from '../../../../models/EnsalamentData';
 import { FatherState } from '../../../../hooks/helpers';
 import EmptyStateImage from '../../../../assets/images/EmptyState.png';
+import { useOptionWeekShift } from '../../../../hooks/OptionsWeekShiftContext';
 
 interface TreeViewComponentProps {
   title: string;
@@ -68,6 +69,7 @@ const TreeViewComponent: FC<TreeViewComponentProps> = ({
   setFatherSelectsChildren,
 }: TreeViewComponentProps) => {
   const classes = useStyles();
+  const { status } = useOptionWeekShift();
 
   const renderTreeView = () => {
     return (
@@ -81,6 +83,7 @@ const TreeViewComponent: FC<TreeViewComponentProps> = ({
           const disabled = value.children && value.children.length === 0;
           return (
             <TreeItemCheckbox
+              nodeId={value.id}
               disabled={disabled}
               indeterminate={fathersState.some(
                 father => father.id === value.id && father.state === 'some'
@@ -96,6 +99,7 @@ const TreeViewComponent: FC<TreeViewComponentProps> = ({
               {value.children &&
                 value.children.map(children => (
                   <TreeItemCheckbox
+                    nodeId={children.id}
                     onClick={() => {
                       setDataSelectsChildren(children.id);
                     }}
@@ -109,6 +113,26 @@ const TreeViewComponent: FC<TreeViewComponentProps> = ({
           );
         })}
       </TreeView>
+    );
+  };
+
+  const renderNoSelected = () => {
+    return (
+      <div
+        style={{
+          marginTop: 40,
+          marginBottom: 40,
+          marginLeft: 20,
+          marginRight: 20,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          maxWidth: 400,
+        }}>
+        <Typography variant="h4" gutterBottom>
+          Não foram selecionados dia e turno
+        </Typography>
+      </div>
     );
   };
 
@@ -149,6 +173,9 @@ const TreeViewComponent: FC<TreeViewComponentProps> = ({
   };
 
   const renderBody = () => {
+    if (status === 'waitingRequest') {
+      return renderNoSelected();
+    }
     if (loading) {
       return renderLoading();
     }

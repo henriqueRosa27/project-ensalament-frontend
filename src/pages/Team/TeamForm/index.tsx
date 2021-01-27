@@ -32,7 +32,7 @@ const schema = Yup.object().shape({
   numberStudents: Yup.number()
     .required('Campo obrigatório')
     .min(0, 'Valor mínimo é 0'),
-  course: Yup.number().required('Campo obrigatório'),
+  course: Yup.string().required('Campo obrigatório'),
 });
 
 const BuildingForm: React.FC = () => {
