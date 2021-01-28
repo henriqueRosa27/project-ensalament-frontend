@@ -1,25 +1,41 @@
-import { Typography } from '@material-ui/core';
 import React from 'react';
+import { Typography } from '@material-ui/core';
+import { useDrag } from 'react-dnd';
+
+import { DivTeam } from './styles';
 
 interface TeamProps {
+  teamId: string;
   name: string;
   course: string;
   numberStudents: number;
   variant: any;
   onRoom: boolean;
+  roomId: string | null;
 }
 
 export default function Team({
+  teamId: id,
   name,
   course,
   numberStudents,
   variant,
   onRoom,
+  roomId,
 }: TeamProps) {
+  const [{ isDragging }, dragRef] = useDrag({
+    item: { type: 'TEAM', roomId, id },
+    collect: monitor => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  });
+
   return (
-    <div
+    <DivTeam
+      onRomm={onRoom}
+      isDragging={isDragging}
+      ref={dragRef}
       style={{
-        backgroundColor: onRoom ? '#f0f1f2' : '#e1e8f2',
         margin: 10,
         padding: 10,
         borderRadius: 10,
@@ -28,6 +44,6 @@ export default function Team({
       <Typography variant={variant}>
         {name}/{course} - {numberStudents}
       </Typography>
-    </div>
+    </DivTeam>
   );
 }

@@ -45,7 +45,6 @@ const Building: React.FC = () => {
         setData(responseData);
         setLoading(false);
       } catch (e) {
-        console.log(await e);
         toast.error(<h1>teste</h1>);
         setLoading(false);
       }

@@ -7,7 +7,9 @@ import React, {
   useContext,
 } from 'react';
 
-import EnsalamentData from '../models/Ensalament';
+import EnsalamentReponse from '../models/Ensalament';
+import EnsalamentData from '../models/GenerateEnsalament';
+import Team from '../models/Team';
 import { useBuildingDataSelects } from './DataBuildingSelectsContext';
 import { useCourseDataSelects } from './DataCourseSelectsContext';
 import { generate } from '../services/ensalament';
@@ -15,6 +17,8 @@ import { generate } from '../services/ensalament';
 interface GenerateEnsalamentData {
   data: EnsalamentData;
   getData: (onSucess: () => void) => void;
+  moveTeamToNotEnsalated: (teamId: string) => void;
+  moveTeamToRoom: (teamId: string, roomId: string) => void;
 }
 
 interface GenerateEnsalamentProps {
@@ -32,12 +36,29 @@ const GenerateEnsalamentProvider: FC<GenerateEnsalamentProps> = ({
   const { childrenSelecteds: roomsIds } = useBuildingDataSelects();
   const { childrenSelecteds: teamsIds } = useCourseDataSelects();
 
+  const converData = (response: EnsalamentReponse): EnsalamentData => {
+    const datas = response.data.map(({ rooms, ...building }) => {
+      return {
+        ...building,
+        rooms: rooms.map(({ team, ...room }) => ({
+          ...room,
+          teams: team ? [team] : [],
+        })),
+      };
+    });
+    const newData: EnsalamentData = {
+      notEnsalate: response.notEnsalate,
+      data: datas,
+    };
+    return newData;
+  };
+
   const getData = useCallback(
     async onSucess => {
       try {
         console.log(roomsIds, teamsIds);
         const dataResponse = await generate(roomsIds, teamsIds);
-        setData(dataResponse);
+        setData(converData(dataResponse));
         onSucess();
       } catch (e) {
         console.log(e);
@@ -46,8 +67,67 @@ const GenerateEnsalamentProvider: FC<GenerateEnsalamentProps> = ({
     [data, roomsIds, teamsIds]
   );
 
+  const getTeamByData = (teamId: string) => {
+    return data.data
+      .map(({ rooms }) => rooms)
+      .flat()
+      .map(({ teams }) => teams)
+      .flat()
+      .find(t => t.id === teamId);
+  };
+
+  const moveTeamToNotEnsalated = useCallback(
+    teamId => {
+      const team = getTeamByData(teamId);
+
+      const newData = data.data.map(({ rooms, ...building }) => ({
+        ...building,
+        rooms: rooms.map(({ teams, ...room }) => {
+          return {
+            ...room,
+            teams: teams.filter(t => t.id !== teamId),
+          };
+        }),
+      }));
+
+      const notEnsalate = [...data.notEnsalate, team!];
+
+      setData({ notEnsalate, data: newData });
+    },
+    [data]
+  );
+
+  const moveTeamToRoom = useCallback(
+    (teamId, roomId) => {
+      let team = data.notEnsalate.find(t => t.id === teamId);
+
+      if (!team) {
+        team = getTeamByData(teamId);
+      }
+
+      const newData = data.data.map(({ rooms, ...building }) => ({
+        ...building,
+        rooms: rooms.map(({ teams, ...room }) => {
+          if (room.id === roomId) teams.push(team!);
+
+          console.log(teams);
+          return {
+            ...room,
+            teams,
+          };
+        }),
+      }));
+
+      const notEnsalate = data.notEnsalate.filter(t => t.id !== teamId);
+
+      setData({ notEnsalate, data: newData });
+    },
+    [data]
+  );
+
   return (
-    <GenerateEnsalamentContext.Provider value={{ data, getData }}>
+    <GenerateEnsalamentContext.Provider
+      value={{ data, getData, moveTeamToNotEnsalated, moveTeamToRoom }}>
       {children}
     </GenerateEnsalamentContext.Provider>
   );
