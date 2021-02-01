@@ -64,15 +64,16 @@ const Columns = (
     sortable: true,
   },
   {
-    name: 'Laboratório',
-    selector: 'isLab',
-    cell: (row: RoomModel) => (row.isLab ? 'Sim' : 'Não'),
-  },
-  {
     name: 'Prédio',
     cell: row => <div>{row.building.name}</div>,
     sortable: true,
   },
+  {
+    name: 'Laboratório',
+    selector: 'isLab',
+    cell: (row: RoomModel) => (row.isLab ? 'Sim' : 'Não'),
+  },
+
   {
     name: 'Status',
     selector: 'status',

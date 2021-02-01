@@ -9,7 +9,6 @@ import React, {
 
 import EnsalamentReponse from '../models/Ensalament';
 import EnsalamentData from '../models/GenerateEnsalament';
-import Team from '../models/Team';
 import { useBuildingDataSelects } from './DataBuildingSelectsContext';
 import { useCourseDataSelects } from './DataCourseSelectsContext';
 import { generate } from '../services/ensalament';
@@ -18,7 +17,11 @@ interface GenerateEnsalamentData {
   data: EnsalamentData;
   getData: (onSucess: () => void) => void;
   moveTeamToNotEnsalated: (teamId: string) => void;
-  moveTeamToRoom: (teamId: string, roomId: string) => void;
+  moveTeamToRoom: (
+    teamId: string,
+    roomId: string,
+    oldRoomId: string | null
+  ) => void;
 }
 
 interface GenerateEnsalamentProps {
@@ -56,7 +59,6 @@ const GenerateEnsalamentProvider: FC<GenerateEnsalamentProps> = ({
   const getData = useCallback(
     async onSucess => {
       try {
-        console.log(roomsIds, teamsIds);
         const dataResponse = await generate(roomsIds, teamsIds);
         setData(converData(dataResponse));
         onSucess();
@@ -98,25 +100,40 @@ const GenerateEnsalamentProvider: FC<GenerateEnsalamentProps> = ({
   );
 
   const moveTeamToRoom = useCallback(
-    (teamId, roomId) => {
+    (teamId, roomId, oldRoomId) => {
       let team = data.notEnsalate.find(t => t.id === teamId);
 
       if (!team) {
         team = getTeamByData(teamId);
       }
 
-      const newData = data.data.map(({ rooms, ...building }) => ({
+      let newData = data.data.map(({ rooms, ...building }) => ({
         ...building,
         rooms: rooms.map(({ teams, ...room }) => {
           if (room.id === roomId) teams.push(team!);
 
-          console.log(teams);
           return {
             ...room,
             teams,
           };
         }),
       }));
+
+      if (oldRoomId) {
+        newData = newData.map(({ rooms, ...building }) => ({
+          ...building,
+          rooms: rooms.map(({ teams, ...room }) => {
+            if (room.id === oldRoomId) {
+              return { ...room, teams: teams.filter(t => t.id !== teamId) };
+            }
+
+            return {
+              ...room,
+              teams,
+            };
+          }),
+        }));
+      }
 
       const notEnsalate = data.notEnsalate.filter(t => t.id !== teamId);
 
@@ -133,7 +150,7 @@ const GenerateEnsalamentProvider: FC<GenerateEnsalamentProps> = ({
   );
 };
 
-export function useOptionWeekShift(): GenerateEnsalamentData {
+export function useGenerateEnsalamentShift(): GenerateEnsalamentData {
   const context = useContext(GenerateEnsalamentContext);
 
   if (!context) {

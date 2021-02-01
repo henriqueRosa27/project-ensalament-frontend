@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core';
 import { useDrop, DragObjectWithType } from 'react-dnd';
 
 import TeamComponent from './Team';
-import { useOptionWeekShift } from '../../../../hooks/GenerateEnsalamentContext';
+import { useGenerateEnsalamentShift } from '../../../../hooks/GenerateEnsalamentContext';
 
 interface DragItem extends DragObjectWithType {
   roomId: string | null;
@@ -11,7 +11,7 @@ interface DragItem extends DragObjectWithType {
 }
 
 export default function Team() {
-  const { data, moveTeamToNotEnsalated } = useOptionWeekShift();
+  const { data, moveTeamToNotEnsalated } = useGenerateEnsalamentShift();
 
   const [{ isOver, canDrop }, dropRef] = useDrop({
     accept: 'TEAM',

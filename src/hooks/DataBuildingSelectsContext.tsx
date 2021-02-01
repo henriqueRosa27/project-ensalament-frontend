@@ -28,6 +28,7 @@ interface DataBuildingSelectsContextData {
   get: (week: number, shift: number) => void;
   setDataSelectsChildren: (id: string) => void;
   setFatherSelectsChildren: (id: string) => void;
+  clearChildren: () => void;
 }
 
 interface DataBuildingSelectsProviderProps {
@@ -54,6 +55,10 @@ const DataCourseSelectsProvider: FC<DataBuildingSelectsProviderProps> = ({
     },
     [childrenSelecteds]
   );
+
+  const clearChildren = useCallback(() => {
+    setChildrenSelecteds([]);
+  }, [childrenSelecteds]);
 
   useEffect(() => {
     changeFatherState(data, childrenSelecteds, fathersState, setFathersState);
@@ -123,6 +128,7 @@ const DataCourseSelectsProvider: FC<DataBuildingSelectsProviderProps> = ({
         get,
         setFatherSelectsChildren,
         fathersState,
+        clearChildren,
       }}>
       {children}
     </DataBuildingSelectsContext.Provider>

@@ -5,7 +5,7 @@ import { useDrop, DragObjectWithType } from 'react-dnd';
 import { Room as RoomModel } from '../../../../models/GenerateEnsalament';
 import TeamModel from '../../../../models/Team';
 import TeamComponent from './Team';
-import { useOptionWeekShift } from '../../../../hooks/GenerateEnsalamentContext';
+import { useGenerateEnsalamentShift } from '../../../../hooks/GenerateEnsalamentContext';
 import ModalComponent from './Modal';
 
 interface RoomProps {
@@ -18,7 +18,7 @@ interface DragItem extends DragObjectWithType {
 }
 
 export default function Room({ room }: RoomProps) {
-  const { moveTeamToRoom, data } = useOptionWeekShift();
+  const { moveTeamToRoom, data } = useGenerateEnsalamentShift();
   const [modalOpen, setModalOpen] = useState(false);
 
   const checkAndReturnTeam = (
@@ -65,7 +65,7 @@ export default function Room({ room }: RoomProps) {
         setModalOpen(true);
         return;
       }
-      moveTeamToRoom(item.id, room.id!);
+      moveTeamToRoom(item.id, room.id!, item.roomId);
     },
     collect: monitor => ({
       isOver: monitor.isOver(),
@@ -91,6 +91,7 @@ export default function Room({ room }: RoomProps) {
           room.teams.length > 0 &&
           room.teams.map(team => (
             <TeamComponent
+              key={team.id}
               teamId={team.id!}
               onRoom
               name={team.name}

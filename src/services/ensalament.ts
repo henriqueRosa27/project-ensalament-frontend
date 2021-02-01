@@ -3,6 +3,18 @@ import CourseModel from '../models/Course';
 import BuildingModel from '../models/Building';
 import EnsalamentModel from '../models/Ensalament';
 
+interface SaveEnsalament {
+  week: number;
+
+  shift: number;
+
+  rooms: {
+    id: string;
+
+    teams: string[];
+  }[];
+}
+
 const getCourses = async (
   week: number,
   shift: number
@@ -34,4 +46,10 @@ const generate = async (
   return response.data;
 };
 
-export { getCourses, getBuildings, generate };
+const save = async (data: SaveEnsalament): Promise<EnsalamentModel> => {
+  console.log(data);
+  const response = await axiosAutenticanted.post(`ensalament/`, data);
+  return response.data;
+};
+
+export { getCourses, getBuildings, generate, save };

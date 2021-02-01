@@ -59,6 +59,21 @@ const Columns = (
     sortable: true,
   },
   {
+    name: 'Número de alunos',
+    selector: 'numberStudents',
+    sortable: true,
+  },
+  {
+    name: 'Curso',
+    cell: row => <div>{row.course.name}</div>,
+    sortable: true,
+  },
+  {
+    name: 'Prefêrencia por laboratório',
+    selector: 'prefLab',
+    cell: row => (row.prefLab ? 'Sim' : 'Não'),
+  },
+  {
     name: 'Status',
     selector: 'status',
     sortable: true,

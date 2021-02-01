@@ -6,6 +6,7 @@ import { shiftOptions, weekOptions } from '../../../models/WeekShift';
 import { useOptionWeekShift } from '../../../hooks/OptionsWeekShiftContext';
 import { useBuildingDataSelects } from '../../../hooks/DataBuildingSelectsContext';
 import { useCourseDataSelects } from '../../../hooks/DataCourseSelectsContext';
+import { useCreateEnsalament } from '../../../hooks/CreateEnsalamentContext';
 
 interface OptionsWeekShiftProps {
   onClickGenerate: () => void;
@@ -25,8 +26,15 @@ export default function OptionsWeekShift({
     getDatas,
     status,
   } = useOptionWeekShift();
-  const { childrenSelecteds: roomsIds } = useBuildingDataSelects();
-  const { childrenSelecteds: teamsIds } = useCourseDataSelects();
+  const {
+    childrenSelecteds: roomsIds,
+    clearChildren: clearChildrenRooms,
+  } = useBuildingDataSelects();
+  const {
+    childrenSelecteds: teamsIds,
+    clearChildren: clearChildrenTeams,
+  } = useCourseDataSelects();
+  const { save } = useCreateEnsalament();
 
   const renderOptions = () => {
     return (
@@ -138,12 +146,14 @@ export default function OptionsWeekShift({
             height: 55,
           }}
           onClick={() => {
+            clearChildrenRooms();
+            clearChildrenTeams();
             changeData({} as any);
             onClickClear();
           }}>
           Limpar
         </Button>
-        {activeStep === 0 && (
+        {activeStep === 0 ? (
           <Button
             variant="contained"
             color="primary"
@@ -157,6 +167,21 @@ export default function OptionsWeekShift({
             disabled={buttonIsDisabled()}
             onClick={onClickGenerate}>
             Gerar
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            size="medium"
+            style={{
+              padding: 5,
+              margin: 5,
+              width: 180,
+              height: 55,
+            }}
+            disabled={buttonIsDisabled()}
+            onClick={save}>
+            Salvar
           </Button>
         )}
       </div>

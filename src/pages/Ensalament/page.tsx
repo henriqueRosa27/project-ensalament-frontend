@@ -12,7 +12,7 @@ import Data from './components/Data';
 import Ensalament from './components/Ensalament';
 import ColorlibStepIcon from './helpers';
 import OptionsWeekShift from './components/Options';
-import { useOptionWeekShift } from '../../hooks/GenerateEnsalamentContext';
+import { useGenerateEnsalamentShift } from '../../hooks/GenerateEnsalamentContext';
 
 interface Data {
   week: number | undefined;
@@ -55,7 +55,7 @@ export default function VerticalLinearStepper() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
 
-  const { getData, data } = useOptionWeekShift();
+  const { getData, data } = useGenerateEnsalamentShift();
 
   const generateEnsalament = () => {
     getData(() => {

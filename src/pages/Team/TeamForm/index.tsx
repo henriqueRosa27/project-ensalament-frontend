@@ -126,41 +126,15 @@ const BuildingForm: React.FC = () => {
           placeholder="Nome da Sala"
           fullWidth
           required
-          style={{
-            marginBottom: 20,
-          }}
         />
       )}
-      {loading ? (
-        <Skeleton
-          variant="rect"
-          width={550}
-          height={55}
-          style={{ marginBottom: 16, marginTop: 20 }}
-        />
-      ) : (
-        <Autocomplete
-          label="Prédio"
-          name="course"
-          fullWidth
-          required
-          noOptionsText="Sem registros"
-          placeholder="Prédio a qual a sala pertence"
-          options={courses}
-          value={courses.find(course => course.id === dataForm.course)}
-          getOptionValue={option => option.id}
-          getOptionLabel={option => option.name}
-          style={{
-            marginBottom: 20,
-          }}
-        />
-      )}
+
       {loading ? (
         <Skeleton
           variant="text"
           width={550}
           height={55}
-          style={{ marginBottom: 16, marginTop: 20 }}
+          style={{ marginBottom: 16, marginTop: 16 }}
         />
       ) : (
         <TextField
@@ -178,7 +152,28 @@ const BuildingForm: React.FC = () => {
           variant="rect"
           width={550}
           height={55}
-          style={{ marginBottom: 14, marginTop: 14 }}
+          style={{ marginBottom: 16, marginTop: 16 }}
+        />
+      ) : (
+        <Autocomplete
+          label="Prédio"
+          name="course"
+          fullWidth
+          required
+          noOptionsText="Sem registros"
+          placeholder="Prédio a qual a sala pertence"
+          options={courses}
+          value={courses.find(course => course.id === dataForm.course)}
+          getOptionValue={option => option.id}
+          getOptionLabel={option => option.name}
+        />
+      )}
+      {loading ? (
+        <Skeleton
+          variant="rect"
+          width={550}
+          height={55}
+          style={{ marginBottom: 16, marginTop: 16 }}
         />
       ) : (
         <Checkboxes

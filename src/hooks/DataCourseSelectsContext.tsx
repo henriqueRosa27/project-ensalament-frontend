@@ -28,6 +28,7 @@ interface DataCourseSelectsContextData {
   get: (week: number, shift: number) => void;
   setDataSelectsChildren: (id: string) => void;
   setFatherSelectsChildren: (id: string) => void;
+  clearChildren: () => void;
 }
 
 interface DataCourseSelectsProviderProps {
@@ -73,6 +74,10 @@ const DataCourseSelectsProvider: FC<DataCourseSelectsProviderProps> = ({
     setDefaultExpanded(defaultExpandedData);
     setFathersState(stateFather);
   }
+
+  const clearChildren = useCallback(() => {
+    setChildrenSelecteds([]);
+  }, [childrenSelecteds]);
 
   const get = useCallback(async (week: number, shift: number) => {
     try {
@@ -123,6 +128,7 @@ const DataCourseSelectsProvider: FC<DataCourseSelectsProviderProps> = ({
         get,
         setFatherSelectsChildren,
         fathersState,
+        clearChildren,
       }}>
       {children}
     </DataCourseSelectsContext.Provider>
