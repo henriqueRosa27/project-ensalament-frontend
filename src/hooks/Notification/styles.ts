@@ -2,11 +2,15 @@ import { makeStyles } from '@material-ui/core';
 
 export default makeStyles(() => ({
   variantSuccess: {
-    backgroundColor: '#43a047 !important',
+    backgroundColor: '#00c936 !important',
     color: '#fff !important',
     borderRadius: 5,
   },
-  variantError: { backgroundColor: 'blue !important' },
+  variantError: {
+    bbackgroundColor: '#f23835 !important',
+    color: '#fff !important',
+    borderRadius: 5,
+  },
   variantWarning: { backgroundColor: 'green !important' },
   variantInfo: { backgroundColor: 'yellow !important' },
 }));
