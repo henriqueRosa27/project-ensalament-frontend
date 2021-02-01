@@ -1,11 +1,11 @@
 import React from 'react';
 
 import Page from './page';
-import DataCourseSelectsProvider from '../../hooks/DataCourseSelectsContext';
-import DataBuildingSelectsProvider from '../../hooks/DataBuildingSelectsContext';
-import OptionsWeekShiftProvider from '../../hooks/OptionsWeekShiftContext';
-import GenerateEnsalamentProvider from '../../hooks/GenerateEnsalamentContext';
-import CreateEnsalamentProvider from '../../hooks/CreateEnsalamentContext';
+import DataCourseSelectsProvider from '../../hooks/Ensalament/Datas/DataCourseSelectsContext';
+import DataBuildingSelectsProvider from '../../hooks/Ensalament/Datas/DataBuildingSelectsContext';
+import OptionsWeekShiftProvider from '../../hooks/Ensalament/OptionsWeekShiftContext';
+import GenerateEnsalamentProvider from '../../hooks/Ensalament/GenerateEnsalamentContext';
+import CreateEnsalamentProvider from '../../hooks/Ensalament/CreateEnsalamentContext';
 
 export default () => (
   <DataCourseSelectsProvider>

@@ -5,7 +5,7 @@ import { useDrop, DragObjectWithType } from 'react-dnd';
 import { Room as RoomModel } from '../../../../models/GenerateEnsalament';
 import TeamModel from '../../../../models/Team';
 import TeamComponent from './Team';
-import { useGenerateEnsalamentShift } from '../../../../hooks/GenerateEnsalamentContext';
+import { useGenerateEnsalamentShift } from '../../../../hooks/Ensalament/GenerateEnsalamentContext';
 import ModalComponent from './Modal';
 
 interface RoomProps {

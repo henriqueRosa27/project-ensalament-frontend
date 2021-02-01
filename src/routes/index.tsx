@@ -10,6 +10,7 @@ import { BuildingList, BuildingForm } from '../pages/Building';
 import { RoomList, RoomForm } from '../pages/Room';
 import { CourseList, CourseForm } from '../pages/Course';
 import { TeamList, TeamForm } from '../pages/Team';
+import Tests from '../pages/_Tests';
 
 const Routes: React.FC = () => {
   return (
@@ -61,6 +62,7 @@ const Routes: React.FC = () => {
                   path="/turma/alterar/:id"
                   render={() => <TeamForm />}
                 />
+                <Route exact path="/tests" render={() => <Tests />} />
               </>
             )}
           />

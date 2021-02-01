@@ -7,11 +7,11 @@ import React, {
   useContext,
 } from 'react';
 
-import EnsalamentReponse from '../models/Ensalament';
-import EnsalamentData from '../models/GenerateEnsalament';
-import { useBuildingDataSelects } from './DataBuildingSelectsContext';
-import { useCourseDataSelects } from './DataCourseSelectsContext';
-import { generate } from '../services/ensalament';
+import EnsalamentReponse from '../../models/Ensalament';
+import EnsalamentData from '../../models/GenerateEnsalament';
+import { useBuildingDataSelects } from './Datas/DataBuildingSelectsContext';
+import { useCourseDataSelects } from './Datas/DataCourseSelectsContext';
+import { generate } from '../../services/ensalament';
 
 interface GenerateEnsalamentData {
   data: EnsalamentData;

@@ -9,7 +9,7 @@ import TreeItemCheckbox from './TreeItemCheckbox';
 import { DataInterface } from '../../../../models/EnsalamentData';
 import { FatherState } from '../../../../hooks/helpers';
 import EmptyStateImage from '../../../../assets/images/EmptyState.png';
-import { useOptionWeekShift } from '../../../../hooks/OptionsWeekShiftContext';
+import { useOptionWeekShift } from '../../../../hooks/Ensalament/OptionsWeekShiftContext';
 
 interface TreeViewComponentProps {
   title: string;

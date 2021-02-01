@@ -12,7 +12,7 @@ import Data from './components/Data';
 import Ensalament from './components/Ensalament';
 import ColorlibStepIcon from './helpers';
 import OptionsWeekShift from './components/Options';
-import { useGenerateEnsalamentShift } from '../../hooks/GenerateEnsalamentContext';
+import { useGenerateEnsalamentShift } from '../../hooks/Ensalament/GenerateEnsalamentContext';
 
 interface Data {
   week: number | undefined;

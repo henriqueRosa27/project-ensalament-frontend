@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Typography } from '@material-ui/core';
 
-import { useGenerateEnsalamentShift } from '../../../hooks/GenerateEnsalamentContext';
+import { useGenerateEnsalamentShift } from '../../../hooks/Ensalament/GenerateEnsalamentContext';
 import RoomComponent from './EnsalamentHelpers/Room';
 import NotEnsalatedComponent from './EnsalamentHelpers/NotEnsalated';
 

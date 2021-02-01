@@ -3,8 +3,8 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 import { Divider } from '@material-ui/core';
 import TreeView from './TreeView';
-import { useCourseDataSelects } from '../../../hooks/DataCourseSelectsContext';
-import { useBuildingDataSelects } from '../../../hooks/DataBuildingSelectsContext';
+import { useCourseDataSelects } from '../../../hooks/Ensalament/Datas/DataCourseSelectsContext';
+import { useBuildingDataSelects } from '../../../hooks/Ensalament/Datas/DataBuildingSelectsContext';
 
 const useStyles = makeStyles(theme =>
   createStyles({

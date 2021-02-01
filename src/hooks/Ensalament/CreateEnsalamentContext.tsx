@@ -8,7 +8,7 @@ import React, {
 
 import { useGenerateEnsalamentShift } from './GenerateEnsalamentContext';
 import { useOptionWeekShift } from './OptionsWeekShiftContext';
-import { save as saveData } from '../services/ensalament';
+import { save as saveData } from '../../services/ensalament';
 
 interface CreateEnsalamentContextData {
   loading: boolean;

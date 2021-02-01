@@ -4,7 +4,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Navbar from '../Navbar';
 import DrawerPage from '../Drawer';
-import Toast from '../Toast';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -30,7 +29,6 @@ const Content: React.FC<ContentProps> = ({ children }: ContentProps) => {
       <CssBaseline />
       <Navbar />
       <DrawerPage />
-      <Toast />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         {children}

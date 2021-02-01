@@ -8,15 +8,15 @@ import React, {
   useEffect,
 } from 'react';
 
-import { DataInterface } from '../models/EnsalamentData';
-import Course from '../models/Course';
-import { getCourses } from '../services/ensalament';
+import { DataInterface } from '../../../models/EnsalamentData';
+import Course from '../../../models/Course';
+import { getCourses } from '../../../services/ensalament';
 import {
   FatherState,
   pushChildren,
   changeFatherState,
   pushChildrensByFatherId,
-} from './helpers';
+} from '../../helpers';
 
 interface DataCourseSelectsContextData {
   courses: Course[];

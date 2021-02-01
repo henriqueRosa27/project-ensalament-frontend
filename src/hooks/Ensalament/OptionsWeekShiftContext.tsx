@@ -7,8 +7,8 @@ import React, {
   useContext,
 } from 'react';
 
-import { useBuildingDataSelects } from './DataBuildingSelectsContext';
-import { useCourseDataSelects } from './DataCourseSelectsContext';
+import { useBuildingDataSelects } from './Datas/DataBuildingSelectsContext';
+import { useCourseDataSelects } from './Datas/DataCourseSelectsContext';
 
 interface Data {
   week: number | undefined;

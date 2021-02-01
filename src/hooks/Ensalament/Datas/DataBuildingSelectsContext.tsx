@@ -8,15 +8,15 @@ import React, {
   useEffect,
 } from 'react';
 
-import { DataInterface } from '../models/EnsalamentData';
-import Building from '../models/Building';
-import { getBuildings } from '../services/ensalament';
+import { DataInterface } from '../../../models/EnsalamentData';
+import Building from '../../../models/Building';
+import { getBuildings } from '../../../services/ensalament';
 import {
   FatherState,
   pushChildren,
   changeFatherState,
   pushChildrensByFatherId,
-} from './helpers';
+} from '../../helpers';
 
 interface DataBuildingSelectsContextData {
   buildings: Building[];
