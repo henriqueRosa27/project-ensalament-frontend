@@ -7,36 +7,36 @@ import React, {
   useContext,
 } from 'react';
 
-import BuildingModel from '../../models/Building';
-import { getBuildings } from '../../services/building';
+import TeamModel from '../../models/Team';
+import { getTeams } from '../../services/team';
 import { useNotification } from '../Notification';
 
-interface BuildingListContextData {
+interface TeamListContextData {
   loading: boolean;
-  data: BuildingModel[];
+  data: TeamModel[];
   loadData(): Promise<void>;
 }
 
-interface BuildingListContextProps {
+interface TeamListContextProps {
   children: ReactNode;
 }
 
-const TeamListContext = createContext<BuildingListContextData>(
-  {} as BuildingListContextData
+const TeamListContext = createContext<TeamListContextData>(
+  {} as TeamListContextData
 );
 
-const BuildingListProvider: FC<BuildingListContextProps> = ({
+const TeamListProvider: FC<TeamListContextProps> = ({
   children,
-}: BuildingListContextProps) => {
+}: TeamListContextProps) => {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<BuildingModel[]>([]);
+  const [data, setData] = useState<TeamModel[]>([]);
   const { error } = useNotification();
 
   const loadData = useCallback(async () => {
     try {
       setLoading(true);
-      const buildingData = await getBuildings();
-      setData(buildingData);
+      const teamData = await getTeams();
+      setData(teamData);
     } catch (e) {
       error('Algo deu errado ao buscar dados');
     } finally {
@@ -50,14 +50,14 @@ const BuildingListProvider: FC<BuildingListContextProps> = ({
   );
 };
 
-export function useBuildingList(): BuildingListContextData {
+export function useTeamList(): TeamListContextData {
   const context = useContext(TeamListContext);
 
   if (!context) {
-    throw new Error('useListBuilding must be used within a ListGroupProvider');
+    throw new Error('useTeamList must be used within a ListGroupProvider');
   }
 
   return context;
 }
 
-export default BuildingListProvider;
+export default TeamListProvider;

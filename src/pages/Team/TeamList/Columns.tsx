@@ -1,52 +1,11 @@
 import React from 'react';
-import { IconButton, Tooltip } from '@material-ui/core';
-import Switch from '@material-ui/core/Switch';
-import { withStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { IDataTableColumn } from 'react-data-table-component';
+import { IconButton } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 
 import TeamModel from '../../../models/Team';
 import history from '../../../routes/history';
 
-const AntSwitch = withStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: 28,
-      height: 16,
-      padding: 0,
-      display: 'flex',
-    },
-    switchBase: {
-      padding: 2,
-      color: theme.palette.common.white,
-      '&$checked': {
-        transform: 'translateX(12px)',
-        color: theme.palette.common.white,
-        '& + $track': {
-          opacity: 1,
-          backgroundColor: theme.palette.success.main,
-          borderColor: theme.palette.success.main,
-        },
-      },
-    },
-    thumb: {
-      width: 12,
-      height: 12,
-      boxShadow: 'none',
-    },
-    track: {
-      border: `1px solid ${theme.palette.grey[500]}`,
-      borderRadius: 16 / 2,
-      opacity: 1,
-      backgroundColor: theme.palette.error.dark,
-    },
-    checked: {},
-  })
-)(Switch);
-
-const Columns = (
-  onChangeSwitch: (row: any) => void
-): Array<IDataTableColumn> => [
+const Columns = [
   {
     name: 'Id',
     selector: 'id',
@@ -65,13 +24,13 @@ const Columns = (
   },
   {
     name: 'Curso',
-    cell: row => <div>{row.course.name}</div>,
+    cell: (row: any) => <div>{row.course.name}</div>,
     sortable: true,
   },
   {
     name: 'Prefêrencia por laboratório',
     selector: 'prefLab',
-    cell: row => (row.prefLab ? 'Sim' : 'Não'),
+    cell: (row: any) => (row.prefLab ? 'Sim' : 'Não'),
   },
   {
     name: 'Status',
@@ -83,17 +42,6 @@ const Columns = (
     name: 'Ações',
     cell: (row: TeamModel) => (
       <>
-        <Tooltip
-          title={row.active ? 'Inativar' : 'Ativar'}
-          aria-label={row.active ? 'inativar' : 'ativar'}>
-          <AntSwitch
-            checked={row.active}
-            onClick={() => {
-              onChangeSwitch(row);
-            }}
-          />
-        </Tooltip>
-
         <IconButton
           aria-label="delete"
           color="inherit"
