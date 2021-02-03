@@ -21,7 +21,7 @@ interface BuildingListContextProps {
   children: ReactNode;
 }
 
-const TeamListContext = createContext<BuildingListContextData>(
+const BuildingListContext = createContext<BuildingListContextData>(
   {} as BuildingListContextData
 );
 
@@ -44,14 +44,14 @@ const BuildingListProvider: FC<BuildingListContextProps> = ({
     }
   }, []);
   return (
-    <TeamListContext.Provider value={{ loading, loadData, data }}>
+    <BuildingListContext.Provider value={{ loading, loadData, data }}>
       {children}
-    </TeamListContext.Provider>
+    </BuildingListContext.Provider>
   );
 };
 
 export function useBuildingList(): BuildingListContextData {
-  const context = useContext(TeamListContext);
+  const context = useContext(BuildingListContext);
 
   if (!context) {
     throw new Error('useListBuilding must be used within a ListGroupProvider');
