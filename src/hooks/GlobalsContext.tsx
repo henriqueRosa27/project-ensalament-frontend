@@ -38,7 +38,6 @@ const GlobalsProvider: React.FC<GlobalsProviderProps> = ({
     setDrawer(true);
   }, [drawer]);
   const toogleDrawer = useCallback(() => {
-    console.log(drawer);
     setDrawer(!drawer);
   }, [drawer]);
 

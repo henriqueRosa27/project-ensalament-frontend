@@ -38,7 +38,7 @@ const BuildingListProvider: FC<BuildingListContextProps> = ({
       const buildingData = await getBuildings();
       setData(buildingData);
     } catch (e) {
-      error('Algo deu errado ao buscar dados');
+      error({ message: 'Algo deu errado ao buscar dados' });
     } finally {
       setLoading(false);
     }

@@ -38,7 +38,7 @@ const TeamListProvider: FC<TeamListContextProps> = ({
       const teamData = await getTeams();
       setData(teamData);
     } catch (e) {
-      error('Algo deu errado ao buscar dados');
+      error({ message: 'Algo deu errado ao buscar dados' });
     } finally {
       setLoading(false);
     }

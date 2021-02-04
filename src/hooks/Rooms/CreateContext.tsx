@@ -39,7 +39,7 @@ const RoomCreateProvider: FC<RoomCreateContextProps> = ({
       setLoading(true);
       await createRoom(name, capacity, isLab, buildingId);
     } catch (e) {
-      error('Algo deu errado ao inserir dados');
+      error({ message: 'Algo deu errado ao inserir dados' });
     } finally {
       setLoading(false);
     }

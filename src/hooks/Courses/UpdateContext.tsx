@@ -34,7 +34,7 @@ const CourseUpdateProvider: FC<CourseUpdateContextProps> = ({
       setLoading(true);
       await updateCourse(id, name);
     } catch (e) {
-      error('Algo deu errado ao alterar dados');
+      error({ message: 'Algo deu errado ao alterar dados' });
     } finally {
       setLoading(false);
     }

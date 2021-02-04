@@ -38,7 +38,7 @@ const CourseByIdProvider: FC<CourseByIdContextProps> = ({
       const courseData = await getCourseById(id);
       setData(courseData);
     } catch (e) {
-      error('Algo deu errado ao buscar dados');
+      error({ message: 'Algo deu errado ao buscar dados' });
     } finally {
       setLoading(false);
     }

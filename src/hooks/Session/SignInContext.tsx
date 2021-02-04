@@ -11,6 +11,7 @@ import { useAuth } from '../AuthContext';
 import signInService from '../../services/session';
 import { api } from '../../services/api';
 import history from '../../routes/history';
+import { useNotification } from '../Notification';
 
 interface SignInData {
   email: string;
@@ -33,10 +34,10 @@ export const SignInProvider: React.FC<SignInProviderProps> = ({
 }: SignInProviderProps) => {
   const [loading, setLoading] = useState(false);
   const { signIn: signInAuthConext } = useAuth();
+  const { error } = useNotification();
 
   const signIn = useCallback(async ({ email, password }) => {
     try {
-      console.log('teste');
       setLoading(true);
 
       const { token } = await signInService({ email, password });
@@ -49,7 +50,21 @@ export const SignInProvider: React.FC<SignInProviderProps> = ({
 
       history.push('/');
     } catch (e) {
-      console.log(e);
+      if (e?.response?.status === 400) {
+        if (e?.response?.data?.error) {
+          error({ title: 'Dados inválidos', message: e.response.data.error });
+        } else {
+          error({
+            title: 'Dados inválidos',
+            message: 'Vavor, revalide os dados e tente novamente',
+          });
+        }
+      } else {
+        error({
+          message: 'Ops, algo de errado aconteceu',
+          title: 'Erro inesperado',
+        });
+      }
     } finally {
       setLoading(false);
     }

@@ -41,7 +41,7 @@ const TeamUpdateProvider: FC<TeamUpdateContextProps> = ({
         setLoading(true);
         await updateTeam(id, name, numberStudents, course, prefLab);
       } catch (e) {
-        error('Algo deu errado ao alterar dados');
+        error({ message: 'Algo deu errado ao alterar dados' });
       } finally {
         setLoading(false);
       }

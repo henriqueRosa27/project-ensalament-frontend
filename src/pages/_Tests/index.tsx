@@ -11,7 +11,7 @@ export default function DisableElevation() {
       variant="contained"
       color="primary"
       onClick={() => {
-        error('Mensagem de test');
+        error({ message: 'Mensagem de test' });
       }}>
       Test
     </Button>

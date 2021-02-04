@@ -34,7 +34,7 @@ const BuildingCreateProvider: FC<BuildingCreateContextProps> = ({
       setLoading(true);
       await createBuilding(name);
     } catch (e) {
-      error('Algo deu errado ao inserir dados');
+      error({ message: 'Algo deu errado ao inserir dados' });
     } finally {
       setLoading(false);
     }

@@ -10,16 +10,26 @@ interface NotificationProps {
   children: ReactNode;
 }
 
+interface ContentData {
+  Icon: JSX.Element;
+  title: string;
+  message: string;
+}
+interface ErrorData {
+  message: string;
+  title?: string;
+}
+
 interface NotificationContextData {
   success: (message: string) => void;
-  error: (message: string) => void;
+  error: (data: ErrorData) => void;
 }
 
 const NotificationContext = createContext<NotificationContextData>(
   {} as NotificationContextData
 );
 
-const content = (Icon: JSX.Element, message: string) => {
+const content = ({ Icon, title, message }: ContentData) => {
   return (
     <div
       style={{
@@ -34,6 +44,9 @@ const content = (Icon: JSX.Element, message: string) => {
           flexDirection: 'column',
         }}>
         <Typography variant="h6" gutterBottom>
+          {title}
+        </Typography>
+        <Typography variant="subtitle1" gutterBottom>
           {message}
         </Typography>
       </div>
@@ -46,10 +59,13 @@ export default function ({ children }: NotificationProps) {
 
   const success = (message: string) => {
     enqueueSnackbar(
-      content(
-        <CheckCircleOutlineIcon style={{ fontSize: 50, marginRight: 30 }} />,
-        message
-      ),
+      content({
+        Icon: (
+          <CheckCircleOutlineIcon style={{ fontSize: 50, marginRight: 30 }} />
+        ),
+        message,
+        title: '',
+      }),
       {
         variant: 'success',
         autoHideDuration: 5000,
@@ -65,12 +81,13 @@ export default function ({ children }: NotificationProps) {
     );
   };
 
-  const error = (message: string) => {
+  const error = ({ message, title = 'Erro' }: ErrorData) => {
     enqueueSnackbar(
-      content(
-        <ErrorOutlineIcon style={{ fontSize: 50, marginRight: 30 }} />,
-        message
-      ),
+      content({
+        Icon: <ErrorOutlineIcon style={{ fontSize: 50, marginRight: 30 }} />,
+        title,
+        message,
+      }),
       {
         variant: 'error',
         autoHideDuration: 5000,

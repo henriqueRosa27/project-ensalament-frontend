@@ -40,7 +40,7 @@ const TeamCreateProvider: FC<TeamCreateContextProps> = ({
         setLoading(true);
         await createTeam(name, numberStudents, course, prefLab);
       } catch (e) {
-        error('Algo deu errado ao inserir dados');
+        error({ message: 'Algo deu errado ao inserir dados' });
       } finally {
         setLoading(false);
       }

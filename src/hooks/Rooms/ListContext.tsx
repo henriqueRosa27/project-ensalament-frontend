@@ -38,7 +38,7 @@ const RoomListProvider: FC<RoomListContextProps> = ({
       const roomData = await getRooms();
       setData(roomData);
     } catch (e) {
-      error('Algo deu errado ao buscar dados');
+      error({ message: 'Algo deu errado ao buscar dados' });
     } finally {
       setLoading(false);
     }

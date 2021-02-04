@@ -38,7 +38,7 @@ const BuildingListProvider: FC<CourseListContextProps> = ({
       const courseData = await getCourses();
       setData(courseData);
     } catch (e) {
-      error('Algo deu errado ao buscar dados');
+      error({ message: 'Algo deu errado ao buscar dados' });
     } finally {
       setLoading(false);
     }

@@ -41,7 +41,7 @@ const RoomUpdateProvider: FC<RoomUpdateContextProps> = ({
         setLoading(true);
         await updateRoom(id, name, capacity, isLab, buildingId);
       } catch (e) {
-        error('Algo deu errado ao alterar dados');
+        error({ message: 'Algo deu errado ao alterar dados' });
       } finally {
         setLoading(false);
       }

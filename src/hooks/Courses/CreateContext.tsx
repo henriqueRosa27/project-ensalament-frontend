@@ -34,7 +34,7 @@ const CourseCreateProvider: FC<CourseCreateContextProps> = ({
       setLoading(true);
       await createCourse(name);
     } catch (e) {
-      error('Algo deu errado ao inserir dados');
+      error({ message: 'Algo deu errado ao inserir dados' });
     } finally {
       setLoading(false);
     }

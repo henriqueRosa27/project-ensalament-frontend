@@ -9,6 +9,7 @@ import React, {
 
 import UserModel from '../models/User';
 import { api } from '../services/api';
+import { useNotification } from './Notification';
 
 interface AuthState {
   token: string;
@@ -38,6 +39,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({
 }: AuthProviderProps) => {
   const [data, setData] = useState<AuthState>({} as AuthState);
   const [loading, setLoading] = useState(true);
+  const { error } = useNotification();
 
   useEffect(() => {
     async function loadStoragedData(): Promise<void> {
@@ -62,7 +64,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({
 
       setData({ token, user });
     } catch (e) {
-      console.log(e);
+      error({ message: 'Ops, algo de errado alconteceu' });
     } finally {
       setLoading(false);
     }

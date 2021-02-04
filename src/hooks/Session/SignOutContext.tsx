@@ -33,14 +33,11 @@ export const SignOutProvider: React.FC<SignOutProviderProps> = ({
     try {
       setLoading(true);
 
-      console.log('teste');
       signOutAuthConext();
 
       delete api.defaults.headers.Authorization;
 
       history.push('/login');
-    } catch (e) {
-      console.log(e);
     } finally {
       setLoading(false);
     }
