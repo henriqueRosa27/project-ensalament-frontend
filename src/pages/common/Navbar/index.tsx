@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import {
   makeStyles,
   AppBar,
@@ -11,8 +10,9 @@ import {
 } from '@material-ui/core';
 import { Menu, ExitToAppOutlined } from '@material-ui/icons';
 
-import { toogleDrawer } from '../../../store/ducks/navigation/actions';
-import { logoutRequest } from '../../../store/ducks/session/actions';
+import { useGlobals } from '../../../hooks/GlobalsContext';
+import { useSignOut } from '../../../hooks/Session/SignOutContext';
+import history from '../../../routes/history';
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
@@ -58,10 +58,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Navbar: React.FC = () => {
   const classes = useStyles();
 
-  const dispatch = useDispatch();
+  const { signOut } = useSignOut();
+  const { toogleDrawer } = useGlobals();
 
   const logout = () => {
-    dispatch(logoutRequest());
+    signOut();
   };
 
   return (
@@ -72,9 +73,7 @@ const Navbar: React.FC = () => {
             <IconButton
               aria-label="Open drawer"
               edge="start"
-              onClick={() => {
-                dispatch(toogleDrawer());
-              }}
+              onClick={toogleDrawer}
               className={classes.hamburger}>
               <Menu />
             </IconButton>

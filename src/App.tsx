@@ -1,23 +1,25 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
 
-import { store, persistor } from './store';
 import Routes from './routes';
 import SnackbarProvider from './hooks/Notification/context';
-import NOtificationProvider from './hooks/Notification';
+import NotificationProvider from './hooks/Notification';
+import AuthProvider from './hooks/AuthContext';
+import SignOutProvider from './hooks/Session/SignOutContext';
+import GlobalsProvider from './hooks/GlobalsContext';
 
 function App(): JSX.Element {
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <SnackbarProvider>
-          <NOtificationProvider>
-            <Routes />
-          </NOtificationProvider>
-        </SnackbarProvider>
-      </PersistGate>
-    </Provider>
+    <SnackbarProvider>
+      <NotificationProvider>
+        <AuthProvider>
+          <SignOutProvider>
+            <GlobalsProvider>
+              <Routes />
+            </GlobalsProvider>
+          </SignOutProvider>
+        </AuthProvider>
+      </NotificationProvider>
+    </SnackbarProvider>
   );
 }
 

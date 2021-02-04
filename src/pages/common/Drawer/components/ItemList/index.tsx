@@ -1,8 +1,7 @@
 import React, { ReactNode } from 'react';
-import { useSelector } from 'react-redux';
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { useLocation } from 'react-router-dom';
 
-import currentRoute from '../../../../../store/selector/route';
 import history from '../../../../../routes/history';
 
 interface ItemListProps {
@@ -16,19 +15,16 @@ const ItemList: React.FC<ItemListProps> = ({
   icon,
   path,
 }: ItemListProps) => {
-  const currentePath = useSelector(currentRoute);
+  const location = useLocation();
   const onClick = () => {
     history.push(path);
   };
 
   return (
     <div>
-      <ListItem button onClick={onClick}>
+      <ListItem button onClick={onClick} selected={location.pathname === path}>
         <ListItemIcon>{icon}</ListItemIcon>
-        <ListItemText
-          primary={label}
-          color={currentePath === path ? 'primary' : 'secondary'}
-        />
+        <ListItemText primary={label} />
       </ListItem>
     </div>
   );

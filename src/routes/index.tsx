@@ -1,7 +1,7 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { ConnectedRouter } from 'connected-react-router';
+import { Route, Switch, Router } from 'react-router-dom';
 
+import PrivateRoute from './PrivateRoute';
 import history from './history';
 import Login from '../pages/Login';
 import Content from '../pages/Common/Content';
@@ -11,64 +11,66 @@ import { RoomList, RoomForm } from '../pages/Room';
 import { CourseList, CourseForm } from '../pages/Course';
 import { TeamList, TeamForm } from '../pages/Team';
 import Tests from '../pages/_Tests';
+import Backdrop from '../pages/Common/Backdrop';
 
 const Routes: React.FC = () => {
   return (
-    <ConnectedRouter history={history}>
+    <Router history={history}>
       <Switch>
         <Route exact path="/login" component={Login} />
         <Content>
           <Route
             component={() => (
               <>
-                <Route exact path="/" render={() => <Ensalament />} />
+                <Backdrop />
+                <PrivateRoute exact path="/" component={Ensalament} />
 
-                <Route exact path="/predio" render={() => <BuildingList />} />
-                <Route
+                <PrivateRoute exact path="/predio" component={BuildingList} />
+                <PrivateRoute
                   exact
                   path="/predio/criar"
-                  render={() => <BuildingForm />}
+                  component={BuildingForm}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path="/predio/alterar/:id"
-                  render={() => <BuildingForm />}
+                  component={BuildingForm}
                 />
 
-                <Route exact path="/sala" render={() => <RoomList />} />
-                <Route exact path="/sala/criar" render={() => <RoomForm />} />
-                <Route
+                <PrivateRoute exact path="/sala" component={RoomList} />
+                <PrivateRoute exact path="/sala/criar" component={RoomForm} />
+                <PrivateRoute
                   exact
                   path="/sala/alterar/:id"
-                  render={() => <RoomForm />}
+                  component={RoomForm}
                 />
 
-                <Route exact path="/curso" render={() => <CourseList />} />
-                <Route
+                <PrivateRoute exact path="/curso" component={CourseList} />
+                <PrivateRoute
                   exact
                   path="/curso/criar"
-                  render={() => <CourseForm />}
+                  component={CourseForm}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path="/curso/alterar/:id"
-                  render={() => <CourseForm />}
+                  component={CourseForm}
                 />
 
-                <Route exact path="/turma" render={() => <TeamList />} />
-                <Route exact path="/turma/criar" render={() => <TeamForm />} />
-                <Route
+                <PrivateRoute exact path="/turma" component={TeamList} />
+                <PrivateRoute exact path="/turma/criar" component={TeamForm} />
+                <PrivateRoute
                   exact
                   path="/turma/alterar/:id"
-                  render={() => <TeamForm />}
+                  component={TeamForm}
                 />
-                <Route exact path="/tests" render={() => <Tests />} />
+                <PrivateRoute exact path="/tests" component={Tests} />
               </>
             )}
           />
         </Content>
       </Switch>
-    </ConnectedRouter>
+    </Router>
   );
 };
 

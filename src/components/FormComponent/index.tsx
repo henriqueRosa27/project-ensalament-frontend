@@ -64,7 +64,6 @@ const validate = async (
   try {
     await schemaValidate.validate(values, { abortEarly: false });
   } catch (e) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return e.inner.reduce((errors: any, error: any) => {
       return setIn(errors, error.path, error.message);
     }, {});

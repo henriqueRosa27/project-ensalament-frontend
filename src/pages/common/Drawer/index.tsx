@@ -1,14 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 
-import { drawerState } from '../../../store/selector/navigation';
 import ItemList from './components/ItemList';
 import ItemsList from './components/ItemsList';
+import { useGlobals } from '../../../hooks/GlobalsContext';
 
 const drawerWidth = 240;
 
@@ -54,19 +53,19 @@ const useStyles = makeStyles((theme: Theme) =>
 const DrawerPage: React.FC = () => {
   const classes = useStyles();
 
-  const drawerIsOpen = useSelector(drawerState);
+  const { drawer } = useGlobals();
 
   return (
     <Drawer
       variant="permanent"
       className={clsx(classes.drawer, {
-        [classes.drawerOpen]: drawerIsOpen,
-        [classes.drawerClose]: !drawerIsOpen,
+        [classes.drawerOpen]: drawer,
+        [classes.drawerClose]: !drawer,
       })}
       classes={{
         paper: clsx({
-          [classes.drawerOpen]: drawerIsOpen,
-          [classes.drawerClose]: !drawerIsOpen,
+          [classes.drawerOpen]: drawer,
+          [classes.drawerClose]: !drawer,
         }),
       }}>
       <div className={classes.toolbar} />
