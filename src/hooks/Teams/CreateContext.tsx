@@ -32,15 +32,29 @@ const TeamCreateProvider: FC<TeamCreateContextProps> = ({
   children,
 }: TeamCreateContextProps) => {
   const [loading, setLoading] = useState(false);
-  const { error } = useNotification();
+  const { error, success } = useNotification();
 
   const createData = useCallback(
     async (name, numberStudents, course, prefLab) => {
       try {
         setLoading(true);
         await createTeam(name, numberStudents, course, prefLab);
+        success({ message: 'Turma inserida com suceso' });
       } catch (e) {
-        error({ message: 'Algo deu errado ao inserir dados' });
+        if (e?.response?.status === 400) {
+          error({
+            title: 'Dados inválidos',
+            message: 'Favor, revalide os dados e tente novamente',
+          });
+        } else {
+          error({
+            message: [
+              'Ops, algo de errado aconteceu',
+              'Tente novamente mais tarde',
+            ],
+            title: 'Erro inesperado',
+          });
+        }
       } finally {
         setLoading(false);
       }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 import { BackDropComponent } from '../components';
 import { StatePage } from '../models/enums';
@@ -41,7 +41,7 @@ export default function PrivateRoute({
   }
 
   if (isAuthorized === StatePage.noAuthorized) {
-    signOut();
+    return <Redirect to="/login" />;
   }
 
   return <BackDropComponent open />;

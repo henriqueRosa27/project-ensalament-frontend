@@ -27,14 +27,28 @@ const BuildingUpdateProvider: FC<BuildingUpdateContextProps> = ({
   children,
 }: BuildingUpdateContextProps) => {
   const [loading, setLoading] = useState(false);
-  const { error } = useNotification();
+  const { error, success } = useNotification();
 
   const updateData = useCallback(async (id, name) => {
     try {
       setLoading(true);
       await updateBuilding(id, name);
+      success({ message: 'Prédio alterado com suceso' });
     } catch (e) {
-      error({ message: 'Algo deu errado ao alterar dados' });
+      if (e?.response?.status === 400) {
+        error({
+          title: 'Dados inválidos',
+          message: 'Favor, revalide os dados e tente novamente',
+        });
+      } else {
+        error({
+          message: [
+            'Ops, algo de errado aconteceu',
+            'Tente novamente mais tarde',
+          ],
+          title: 'Erro inesperado',
+        });
+      }
     } finally {
       setLoading(false);
     }

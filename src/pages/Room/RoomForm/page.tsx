@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useRoomCreate } from '../../../hooks/Rooms/CreateContext';
 import { useRoomUpdate } from '../../../hooks/Rooms/UpdateContext';
 import { useRoomById } from '../../../hooks/Rooms/GetByIdContext';
+import { useNotification } from '../../../hooks/Notification';
 import { FormComponent } from '../../../components';
 import { getBuildingsActive } from '../../../services/building';
 import history from '../../../routes/history';
@@ -51,6 +52,7 @@ const BuildingForm: React.FC = () => {
   const { createData, loading: submittingCreate } = useRoomCreate();
   const { updateData, loading: submittingUpdate } = useRoomUpdate();
   const { loadData, data, loading: loadingById } = useRoomById();
+  const { error } = useNotification();
 
   useEffect(() => {
     setLoading(loadingById);
@@ -83,6 +85,11 @@ const BuildingForm: React.FC = () => {
     history.push('/sala');
   };
 
+  const onErrorLoadData = () => {
+    error({ title: 'Erro ao buscar dado', message: 'Prédio não existe' });
+    history.push('/sala');
+  };
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -90,10 +97,13 @@ const BuildingForm: React.FC = () => {
         const responseData = await getBuildingsActive();
         setDataBuilding(responseData);
         if (id) {
-          loadData(id);
+          loadData(id, onErrorLoadData);
         }
       } catch (e) {
-        console.log(e);
+        error({
+          title: 'Erro ao buscar dados',
+          message: 'Erro algo buscar Prédios',
+        });
       } finally {
         setLoading(false);
       }

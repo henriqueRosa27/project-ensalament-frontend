@@ -42,7 +42,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({
   const { error } = useNotification();
 
   useEffect(() => {
-    async function loadStoragedData(): Promise<void> {
+    (async () => {
       const token = localStorage.getItem('token');
       const user = localStorage.getItem('user');
       if (token && user) {
@@ -51,9 +51,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({
       }
 
       setLoading(false);
-    }
-
-    loadStoragedData();
+    })();
   }, []);
 
   const signIn = useCallback(async ({ user, token }) => {

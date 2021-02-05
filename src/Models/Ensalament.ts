@@ -16,3 +16,11 @@ interface Building {
 export interface Room extends RoomDefault {
   team: Team;
 }
+
+export interface EnsalementResponse {
+  id: string;
+  week: number;
+  shift: number;
+  rooms: number;
+  teams: number;
+}

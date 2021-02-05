@@ -2,11 +2,11 @@ import React from 'react';
 import { TextField, Button, Typography } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 
-import { shiftOptions, weekOptions } from '../../../models/WeekShift';
-import { useOptionWeekShift } from '../../../hooks/Ensalament/OptionsWeekShiftContext';
-import { useBuildingDataSelects } from '../../../hooks/Ensalament/Datas/DataBuildingSelectsContext';
-import { useCourseDataSelects } from '../../../hooks/Ensalament/Datas/DataCourseSelectsContext';
-import { useCreateEnsalament } from '../../../hooks/Ensalament/CreateEnsalamentContext';
+import { shiftOptions, weekOptions } from '../../../../models/WeekShift';
+import { useOptionWeekShift } from '../../../../hooks/Ensalament/OptionsWeekShiftContext';
+import { useBuildingDataSelects } from '../../../../hooks/Ensalament/Datas/DataBuildingSelectsContext';
+import { useCourseDataSelects } from '../../../../hooks/Ensalament/Datas/DataCourseSelectsContext';
+import { useCreateEnsalament } from '../../../../hooks/Ensalament/CreateEnsalamentContext';
 
 interface OptionsWeekShiftProps {
   onClickGenerate: () => void;

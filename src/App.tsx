@@ -9,17 +9,17 @@ import GlobalsProvider from './hooks/GlobalsContext';
 
 function App(): JSX.Element {
   return (
-    <SnackbarProvider>
-      <NotificationProvider>
-        <AuthProvider>
+    <AuthProvider>
+      <SnackbarProvider>
+        <NotificationProvider>
           <SignOutProvider>
             <GlobalsProvider>
               <Routes />
             </GlobalsProvider>
           </SignOutProvider>
-        </AuthProvider>
-      </NotificationProvider>
-    </SnackbarProvider>
+        </NotificationProvider>
+      </SnackbarProvider>
+    </AuthProvider>
   );
 }
 

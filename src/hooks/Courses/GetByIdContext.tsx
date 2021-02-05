@@ -14,7 +14,7 @@ import { useNotification } from '../Notification';
 interface CourseByIdContextData {
   loading: boolean;
   data: CourseModel;
-  loadData(id: string): Promise<void>;
+  loadData(id: string, onError: () => void): Promise<void>;
 }
 
 interface CourseByIdContextProps {
@@ -32,13 +32,13 @@ const CourseByIdProvider: FC<CourseByIdContextProps> = ({
   const [data, setData] = useState<CourseModel>({} as CourseModel);
   const { error } = useNotification();
 
-  const loadData = useCallback(async id => {
+  const loadData = useCallback(async (id, onError) => {
     try {
       setLoading(true);
       const courseData = await getCourseById(id);
       setData(courseData);
     } catch (e) {
-      error({ message: 'Algo deu errado ao buscar dados' });
+      onError();
     } finally {
       setLoading(false);
     }

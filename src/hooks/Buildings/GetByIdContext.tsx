@@ -9,12 +9,11 @@ import React, {
 
 import BuildingModel from '../../models/Building';
 import { getBuildingById } from '../../services/building';
-import { useNotification } from '../Notification';
 
 interface BuildingByIdContextData {
   loading: boolean;
   data: BuildingModel;
-  loadData(id: string): Promise<void>;
+  loadData(id: string, onError: () => void): Promise<void>;
 }
 
 interface BuildingByIdContextProps {
@@ -30,15 +29,14 @@ const BuildingByIdProvider: FC<BuildingByIdContextProps> = ({
 }: BuildingByIdContextProps) => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<BuildingModel>({} as BuildingModel);
-  const { error } = useNotification();
 
-  const loadData = useCallback(async id => {
+  const loadData = useCallback(async (id, onError) => {
     try {
       setLoading(true);
       const buildingData = await getBuildingById(id);
       setData(buildingData);
     } catch (e) {
-      error({ message: 'Algo deu errado ao buscar dados' });
+      onError();
     } finally {
       setLoading(false);
     }

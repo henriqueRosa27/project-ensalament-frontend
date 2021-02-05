@@ -8,12 +8,8 @@ import { useParams } from 'react-router-dom';
 import { useBuildingCreate } from '../../../hooks/Buildings/CreateContext';
 import { useBuildingUpdate } from '../../../hooks/Buildings/UpdateContext';
 import { useBuildingById } from '../../../hooks/Buildings/GetByIdContext';
+import { useNotification } from '../../../hooks/Notification';
 import { FormComponent } from '../../../components';
-import {
-  getBuildingById,
-  createBuilding,
-  updateBuilding,
-} from '../../../services/building';
 import history from '../../../routes/history';
 
 interface BuildingFormvalues {
@@ -42,6 +38,7 @@ const BuildingForm: React.FC = () => {
   const { createData, loading: submittingCreate } = useBuildingCreate();
   const { updateData, loading: submittingUpdate } = useBuildingUpdate();
   const { loadData, data, loading: loadingById } = useBuildingById();
+  const { error } = useNotification();
 
   const onSubmit = async ({ name }: BuildingFormvalues) => {
     if (id) {
@@ -64,9 +61,14 @@ const BuildingForm: React.FC = () => {
     setDataForm({ name: data.name });
   }, [data]);
 
+  const onErrorLoadData = () => {
+    error({ title: 'Erro ao buscar dado', message: 'Prédio não existe' });
+    history.push('/predio');
+  };
+
   useEffect(() => {
     if (id) {
-      loadData(id);
+      loadData(id, onErrorLoadData);
     }
   }, []);
 

@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core';
 import { useDrop, DragObjectWithType } from 'react-dnd';
 
 import TeamComponent from './Team';
-import { useGenerateEnsalamentShift } from '../../../../hooks/Ensalament/GenerateEnsalamentContext';
+import { useGenerateEnsalamentShift } from '../../../../../hooks/Ensalament/GenerateEnsalamentContext';
 
 interface DragItem extends DragObjectWithType {
   roomId: string | null;

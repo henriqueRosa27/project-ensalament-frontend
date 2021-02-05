@@ -1,7 +1,7 @@
 import { api as axiosAutenticanted } from './api';
 import CourseModel from '../models/Course';
 import BuildingModel from '../models/Building';
-import EnsalamentModel from '../models/Ensalament';
+import EnsalamentModel, { EnsalementResponse } from '../models/Ensalament';
 
 interface SaveEnsalament {
   week: number;
@@ -47,9 +47,13 @@ const generate = async (
 };
 
 const save = async (data: SaveEnsalament): Promise<EnsalamentModel> => {
-  console.log(data);
   const response = await axiosAutenticanted.post(`ensalament/`, data);
   return response.data;
 };
 
-export { getCourses, getBuildings, generate, save };
+const getEnsalaments = async (): Promise<EnsalementResponse[]> => {
+  const response = await axiosAutenticanted.get(`ensalament`);
+  return response.data;
+};
+
+export { getCourses, getBuildings, generate, save, getEnsalaments };

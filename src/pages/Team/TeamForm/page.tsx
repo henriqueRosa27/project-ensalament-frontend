@@ -8,8 +8,8 @@ import { useParams } from 'react-router-dom';
 import { useTeamCreate } from '../../../hooks/Teams/CreateContext';
 import { useTeamUpdate } from '../../../hooks/Teams/UpdateContext';
 import { useTeamById } from '../../../hooks/Teams/GetByIdContext';
+import { useNotification } from '../../../hooks/Notification';
 import { FormComponent } from '../../../components';
-import { getTeamById, createTeam, updateTeam } from '../../../services/team';
 import history from '../../../routes/history';
 import Course from '../../../models/Course';
 import { getCoursesActive } from '../../../services/course';
@@ -53,6 +53,7 @@ const BuildingForm: React.FC = () => {
   const { createData, loading: submittingCreate } = useTeamCreate();
   const { updateData, loading: submittingUpdate } = useTeamUpdate();
   const { loadData, data, loading: loadingById } = useTeamById();
+  const { error } = useNotification();
 
   useEffect(() => {
     setLoading(loadingById);
@@ -85,18 +86,25 @@ const BuildingForm: React.FC = () => {
     history.push('/turma');
   };
 
+  const onErrorLoadData = () => {
+    error({ title: 'Erro ao buscar dado', message: 'Turma não existe' });
+    history.push('/turma');
+  };
+
   useEffect(() => {
     const getData = async () => {
       try {
         setLoading(true);
         const responseCourse = await getCoursesActive();
         setCourses(responseCourse);
-        console.log(id);
         if (id) {
-          await loadData(id);
+          await loadData(id, onErrorLoadData);
         }
       } catch (e) {
-        console.log(e);
+        error({
+          title: 'Erro ao buscar dados',
+          message: 'Erro algo buscar Turmas',
+        });
       } finally {
         setLoading(false);
       }

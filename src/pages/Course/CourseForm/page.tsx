@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useCourseCreate } from '../../../hooks/Courses/CreateContext';
 import { useCourseUpdate } from '../../../hooks/Courses/UpdateContext';
 import { useCourseById } from '../../../hooks/Courses/GetByIdContext';
+import { useNotification } from '../../../hooks/Notification';
 import { FormComponent } from '../../../components';
 import history from '../../../routes/history';
 
@@ -37,6 +38,7 @@ const BuildingForm: React.FC = () => {
   const { createData, loading: submittingCreate } = useCourseCreate();
   const { updateData, loading: submittingUpdate } = useCourseUpdate();
   const { loadData, data, loading: loadingById } = useCourseById();
+  const { error } = useNotification();
 
   const onSubmit = async ({ name }: CourseFormvalues) => {
     if (id) {
@@ -59,9 +61,14 @@ const BuildingForm: React.FC = () => {
     setDataForm({ name: data.name });
   }, [data]);
 
+  const onErrorLoadData = () => {
+    error({ title: 'Erro ao buscar dado', message: 'Prédio não existe' });
+    history.push('/curso');
+  };
+
   useEffect(() => {
     if (id) {
-      loadData(id);
+      loadData(id, onErrorLoadData);
     }
   }, []);
 

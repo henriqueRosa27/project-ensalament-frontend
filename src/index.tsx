@@ -8,9 +8,7 @@ import './index.css';
 
 ReactDOM.render(
   <DndProvider backend={HTML5Backend}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <App />
   </DndProvider>,
   document.getElementById('root')
 );

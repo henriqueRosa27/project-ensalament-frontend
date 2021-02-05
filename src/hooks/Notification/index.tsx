@@ -13,21 +13,34 @@ interface NotificationProps {
 interface ContentData {
   Icon: JSX.Element;
   title: string;
-  message: string;
+  message: string | string[];
 }
 interface ErrorData {
+  message: string | string[];
+  title?: string;
+}
+
+interface SuccessData {
   message: string;
   title?: string;
 }
 
 interface NotificationContextData {
-  success: (message: string) => void;
+  success: (data: SuccessData) => void;
   error: (data: ErrorData) => void;
 }
 
 const NotificationContext = createContext<NotificationContextData>(
   {} as NotificationContextData
 );
+
+const contentMessage = (message: string) => {
+  return (
+    <Typography variant="subtitle1" gutterBottom>
+      {message}
+    </Typography>
+  );
+};
 
 const content = ({ Icon, title, message }: ContentData) => {
   return (
@@ -46,9 +59,9 @@ const content = ({ Icon, title, message }: ContentData) => {
         <Typography variant="h6" gutterBottom>
           {title}
         </Typography>
-        <Typography variant="subtitle1" gutterBottom>
-          {message}
-        </Typography>
+        {Array.isArray(message)
+          ? message.map(m => contentMessage(m))
+          : contentMessage(message)}
       </div>
     </div>
   );
@@ -57,14 +70,14 @@ const content = ({ Icon, title, message }: ContentData) => {
 export default function ({ children }: NotificationProps) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-  const success = (message: string) => {
+  const success = ({ message, title = 'Sucesso' }: SuccessData) => {
     enqueueSnackbar(
       content({
         Icon: (
           <CheckCircleOutlineIcon style={{ fontSize: 50, marginRight: 30 }} />
         ),
         message,
-        title: '',
+        title,
       }),
       {
         variant: 'success',

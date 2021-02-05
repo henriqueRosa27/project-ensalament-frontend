@@ -51,12 +51,12 @@ export const SignInProvider: React.FC<SignInProviderProps> = ({
       history.push('/');
     } catch (e) {
       if (e?.response?.status === 400) {
-        if (e?.response?.data?.error) {
+        if (!e?.response?.data?.message) {
           error({ title: 'Dados inválidos', message: e.response.data.error });
         } else {
           error({
             title: 'Dados inválidos',
-            message: 'Vavor, revalide os dados e tente novamente',
+            message: 'Favor, revalide os dados e tente novamente',
           });
         }
       } else {

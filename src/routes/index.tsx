@@ -5,15 +5,24 @@ import PrivateRoute from './PrivateRoute';
 import history from './history';
 import Login from '../pages/Login';
 import Content from '../pages/Common/Content';
-import Ensalament from '../pages/Ensalament';
+import {
+  GenerateEnsalamentPage,
+  ListEnsalamentPage,
+} from '../pages/Ensalament';
 import { BuildingList, BuildingForm } from '../pages/Building';
 import { RoomList, RoomForm } from '../pages/Room';
 import { CourseList, CourseForm } from '../pages/Course';
 import { TeamList, TeamForm } from '../pages/Team';
 import Tests from '../pages/_Tests';
 import Backdrop from '../pages/Common/Backdrop';
+import { BackDropComponent } from '../components';
+import { useAuth } from '../hooks/AuthContext';
 
 const Routes: React.FC = () => {
+  const { loading } = useAuth();
+  if (loading) {
+    return <BackDropComponent open />;
+  }
   return (
     <Router history={history}>
       <Switch>
@@ -23,7 +32,12 @@ const Routes: React.FC = () => {
             component={() => (
               <>
                 <Backdrop />
-                <PrivateRoute exact path="/" component={Ensalament} />
+                <PrivateRoute exact path="/" component={ListEnsalamentPage} />
+                <PrivateRoute
+                  exact
+                  path="/ensalamento/gerar"
+                  component={GenerateEnsalamentPage}
+                />
 
                 <PrivateRoute exact path="/predio" component={BuildingList} />
                 <PrivateRoute

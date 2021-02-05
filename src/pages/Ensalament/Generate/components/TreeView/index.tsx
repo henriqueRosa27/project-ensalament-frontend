@@ -6,10 +6,10 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { Avatar, CircularProgress, Typography } from '@material-ui/core';
 
 import TreeItemCheckbox from './TreeItemCheckbox';
-import { DataInterface } from '../../../../models/EnsalamentData';
-import { FatherState } from '../../../../hooks/helpers';
-import EmptyStateImage from '../../../../assets/images/EmptyState.png';
-import { useOptionWeekShift } from '../../../../hooks/Ensalament/OptionsWeekShiftContext';
+import { DataInterface } from '../../../../../models/EnsalamentData';
+import { FatherState } from '../../../../../hooks/helpers';
+import EmptyStateImage from '../../../../../assets/images/EmptyState.png';
+import { useOptionWeekShift } from '../../../../../hooks/Ensalament/OptionsWeekShiftContext';
 
 interface TreeViewComponentProps {
   title: string;
