@@ -43,6 +43,7 @@ const EnsalamentListProvider: FC<EnsalamentListContextProps> = ({
       setLoading(false);
     }
   }, []);
+
   return (
     <EnsalamentListContext.Provider value={{ loading, loadData, data }}>
       {children}
