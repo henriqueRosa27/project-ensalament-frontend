@@ -4,7 +4,7 @@ import { Route, Switch, Router } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import history from './history';
 import Login from '../pages/Login';
-import Content from '../pages/Common/Content';
+import Content from '../pages/common/Content';
 import {
   GenerateEnsalamentPage,
   ListEnsalamentPage,
@@ -14,7 +14,7 @@ import { RoomList, RoomForm } from '../pages/Room';
 import { CourseList, CourseForm } from '../pages/Course';
 import { TeamList, TeamForm } from '../pages/Team';
 import Tests from '../pages/_Tests';
-import Backdrop from '../pages/Common/Backdrop';
+import Backdrop from '../pages/common/Backdrop';
 import { BackDropComponent } from '../components';
 import { useAuth } from '../hooks/AuthContext';
 

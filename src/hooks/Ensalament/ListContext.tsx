@@ -7,7 +7,7 @@ import React, {
   useContext,
 } from 'react';
 
-import { EnsalementResponse } from '../../models/Ensalament';
+import { EnsalementResponse } from '../../Models/Ensalament';
 import { getEnsalaments } from '../../services/ensalament';
 import { useNotification } from '../Notification';
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import { BackDropComponent } from '../components';
-import { StatePage } from '../models/enums';
+import { StatePage } from '../Models/enums';
 import { useAuth } from '../hooks/AuthContext';
 import { useSignOut } from '../hooks/Session/SignOutContext';
 

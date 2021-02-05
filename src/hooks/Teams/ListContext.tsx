@@ -7,7 +7,7 @@ import React, {
   useContext,
 } from 'react';
 
-import TeamModel from '../../models/Team';
+import TeamModel from '../../Models/Team';
 import { getTeams } from '../../services/team';
 import { useNotification } from '../Notification';
 

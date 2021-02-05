@@ -7,7 +7,7 @@ import React, {
   useContext,
 } from 'react';
 
-import BuildingModel from '../../models/Building';
+import BuildingModel from '../../Models/Building';
 import { getBuildingById } from '../../services/building';
 
 interface BuildingByIdContextData {

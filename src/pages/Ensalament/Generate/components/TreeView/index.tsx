@@ -6,7 +6,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { Avatar, CircularProgress, Typography } from '@material-ui/core';
 
 import TreeItemCheckbox from './TreeItemCheckbox';
-import { DataInterface } from '../../../../../models/EnsalamentData';
+import { DataInterface } from '../../../../../Models/EnsalamentData';
 import { FatherState } from '../../../../../hooks/helpers';
 import EmptyStateImage from '../../../../../assets/images/EmptyState.png';
 import { useOptionWeekShift } from '../../../../../hooks/Ensalament/OptionsWeekShiftContext';

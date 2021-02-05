@@ -11,7 +11,7 @@ import { useTeamById } from '../../../hooks/Teams/GetByIdContext';
 import { useNotification } from '../../../hooks/Notification';
 import { FormComponent } from '../../../components';
 import history from '../../../routes/history';
-import Course from '../../../models/Course';
+import Course from '../../../Models/Course';
 import { getCoursesActive } from '../../../services/course';
 
 interface TeamFormvalues {

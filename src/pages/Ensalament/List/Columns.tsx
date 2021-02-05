@@ -4,7 +4,7 @@ import React from 'react';
 
 // import RoomModel from '../../../models/Room';
 // import history from '../../../routes/history';
-import { shiftOptions, weekOptions } from '../../../models/WeekShift';
+import { shiftOptions, weekOptions } from '../../../Models/WeekShift';
 
 const Columns = [
   {

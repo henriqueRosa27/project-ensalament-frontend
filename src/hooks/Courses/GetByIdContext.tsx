@@ -7,7 +7,7 @@ import React, {
   useContext,
 } from 'react';
 
-import CourseModel from '../../models/Course';
+import CourseModel from '../../Models/Course';
 import { getCourseById } from '../../services/course';
 import { useNotification } from '../Notification';
 

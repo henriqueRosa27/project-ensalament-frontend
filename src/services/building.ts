@@ -1,5 +1,5 @@
 import { api as axiosAutenticanted } from './api';
-import BuildingModel from '../models/Building';
+import BuildingModel from '../Models/Building';
 
 const getBuildings = async (): Promise<BuildingModel[]> => {
   const response = await axiosAutenticanted.get('building');

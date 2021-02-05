@@ -1,7 +1,7 @@
 import { api as axiosAutenticanted } from './api';
-import CourseModel from '../models/Course';
-import BuildingModel from '../models/Building';
-import EnsalamentModel, { EnsalementResponse } from '../models/Ensalament';
+import CourseModel from '../Models/Course';
+import BuildingModel from '../Models/Building';
+import EnsalamentModel, { EnsalementResponse } from '../Models/Ensalament';
 
 interface SaveEnsalament {
   week: number;

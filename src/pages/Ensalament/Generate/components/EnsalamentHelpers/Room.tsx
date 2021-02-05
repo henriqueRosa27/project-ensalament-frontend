@@ -2,8 +2,8 @@ import { Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDrop, DragObjectWithType } from 'react-dnd';
 
-import { Room as RoomModel } from '../../../../../models/GenerateEnsalament';
-import TeamModel from '../../../../../models/Team';
+import { Room as RoomModel } from '../../../../../Models/GenerateEnsalament';
+import TeamModel from '../../../../../Models/Team';
 import TeamComponent from './Team';
 import { useGenerateEnsalamentShift } from '../../../../../hooks/Ensalament/GenerateEnsalamentContext';
 import ModalComponent from './Modal';

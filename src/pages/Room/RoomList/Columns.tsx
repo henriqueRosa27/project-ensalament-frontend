@@ -2,7 +2,7 @@ import React from 'react';
 import { IconButton } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 
-import RoomModel from '../../../models/Room';
+import RoomModel from '../../../Models/Room';
 import history from '../../../routes/history';
 
 const Columns = [

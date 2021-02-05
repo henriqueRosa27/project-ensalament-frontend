@@ -7,8 +7,8 @@ import React, {
   useContext,
 } from 'react';
 
-import EnsalamentReponse from '../../models/Ensalament';
-import EnsalamentData from '../../models/GenerateEnsalament';
+import EnsalamentReponse from '../../Models/Ensalament';
+import EnsalamentData from '../../Models/GenerateEnsalament';
 import { useBuildingDataSelects } from './Datas/DataBuildingSelectsContext';
 import { useCourseDataSelects } from './Datas/DataCourseSelectsContext';
 import { generate } from '../../services/ensalament';

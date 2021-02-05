@@ -2,7 +2,7 @@ import React from 'react';
 import { IconButton } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 
-import TeamModel from '../../../models/Team';
+import TeamModel from '../../../Models/Team';
 import history from '../../../routes/history';
 
 const Columns = [

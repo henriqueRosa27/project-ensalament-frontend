@@ -1,5 +1,5 @@
 import { api as axiosAutenticanted } from './api';
-import TeamModel from '../models/Team';
+import TeamModel from '../Models/Team';
 
 const getTeams = async (): Promise<any[]> => {
   const response = await axiosAutenticanted.get('team');

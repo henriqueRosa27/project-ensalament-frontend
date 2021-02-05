@@ -1,4 +1,4 @@
-import { DataInterface } from '../models/EnsalamentData';
+import { DataInterface } from '../Models/EnsalamentData';
 
 export interface FatherState {
   id: string;

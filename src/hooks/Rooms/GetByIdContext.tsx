@@ -7,7 +7,7 @@ import React, {
   useContext,
 } from 'react';
 
-import RoomModel from '../../models/Room';
+import RoomModel from '../../Models/Room';
 import { getRoomById } from '../../services/room';
 import { useNotification } from '../Notification';
 

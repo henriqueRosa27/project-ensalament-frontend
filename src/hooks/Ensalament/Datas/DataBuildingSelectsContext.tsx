@@ -8,8 +8,8 @@ import React, {
   useEffect,
 } from 'react';
 
-import { DataInterface } from '../../../models/EnsalamentData';
-import Building from '../../../models/Building';
+import { DataInterface } from '../../../Models/EnsalamentData';
+import Building from '../../../Models/Building';
 import { getBuildings } from '../../../services/ensalament';
 import {
   FatherState,

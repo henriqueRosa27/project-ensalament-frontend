@@ -7,7 +7,7 @@ import React, {
   ReactNode,
 } from 'react';
 
-import UserModel from '../models/User';
+import UserModel from '../Models/User';
 import { api } from '../services/api';
 import { useNotification } from './Notification';
 

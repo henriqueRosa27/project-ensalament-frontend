@@ -12,7 +12,7 @@ import { useNotification } from '../../../hooks/Notification';
 import { FormComponent } from '../../../components';
 import { getBuildingsActive } from '../../../services/building';
 import history from '../../../routes/history';
-import BuildingModel from '../../../models/Building';
+import BuildingModel from '../../../Models/Building';
 
 interface RoomFormvalues {
   name?: string;
