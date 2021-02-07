@@ -4,6 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Navbar from '../Navbar';
 import DrawerPage from '../Drawer';
+import BackDrop from '../Backdrop';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -27,6 +28,7 @@ const Content: React.FC<ContentProps> = ({ children }: ContentProps) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
+      <BackDrop />
       <Navbar />
       <DrawerPage />
       <main className={classes.content}>

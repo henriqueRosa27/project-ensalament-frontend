@@ -49,6 +49,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: theme.spacing(6),
       padding: theme.spacing(3),
     },
+    borderRadius: 20,
+    border: 'solid rgba(63, 81, 181, 0.4 )',
   },
   buttons: {
     display: 'flex',

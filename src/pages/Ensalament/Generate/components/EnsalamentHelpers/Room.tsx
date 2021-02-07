@@ -79,8 +79,8 @@ export default function Room({ room }: RoomProps) {
         ref={dropRef}
         style={{
           backgroundColor: canDrop && isOver ? '#8ea1f5' : '#e1e8f2',
-          margin: 10,
-          padding: 10,
+          margin: 5,
+          padding: 5,
           borderRadius: 10,
           minWidth: 300,
         }}>
@@ -97,7 +97,7 @@ export default function Room({ room }: RoomProps) {
               name={team.name}
               course={team.course.name}
               numberStudents={team.numberStudents}
-              variant="h5"
+              variant="h6"
               roomId={room.id!}
             />
           ))}

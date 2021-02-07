@@ -45,7 +45,7 @@ const GlobalsProvider: React.FC<GlobalsProviderProps> = ({
     setBackdrop(true);
   }, [backdrop]);
   const closeBackdrop = useCallback(() => {
-    setBackdrop(true);
+    setBackdrop(false);
   }, [backdrop]);
   const toogleBackdrop = useCallback(() => {
     setBackdrop(!backdrop);

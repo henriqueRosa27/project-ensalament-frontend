@@ -17,6 +17,7 @@ import {
   changeFatherState,
   pushChildrensByFatherId,
 } from '../../helpers';
+import { useNotification } from '../../Notification';
 
 interface DataCourseSelectsContextData {
   courses: Course[];
@@ -25,7 +26,7 @@ interface DataCourseSelectsContextData {
   childrenSelecteds: string[];
   defaultExpanded: string[];
   fathersState: FatherState[];
-  get: (week: number, shift: number) => void;
+  get: (week: number, shift: number) => Promise<void>;
   setDataSelectsChildren: (id: string) => void;
   setFatherSelectsChildren: (id: string) => void;
   clearChildren: () => void;
@@ -48,6 +49,7 @@ const DataCourseSelectsProvider: FC<DataCourseSelectsProviderProps> = ({
   const [childrenSelecteds, setChildrenSelecteds] = useState<string[]>([]);
   const [defaultExpanded, setDefaultExpanded] = useState<string[]>([]);
   const [fathersState, setFathersState] = useState<FatherState[]>([]);
+  const { error } = useNotification();
 
   function convertData(dataCourses: Course[]) {
     const dataConverted = dataCourses.map(value => {
@@ -86,7 +88,7 @@ const DataCourseSelectsProvider: FC<DataCourseSelectsProviderProps> = ({
       setCourses(dataCourses);
       convertData(dataCourses);
     } catch (e) {
-      console.log(e);
+      error({ message: 'Ops, algum erro ocorreu ao buscar as salas' });
     } finally {
       setLoading(false);
     }

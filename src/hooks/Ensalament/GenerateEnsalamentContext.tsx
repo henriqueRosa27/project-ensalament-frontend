@@ -9,6 +9,8 @@ import React, {
 
 import EnsalamentReponse from '../../Models/Ensalament';
 import EnsalamentData from '../../Models/GenerateEnsalament';
+import { useNotification } from '../Notification';
+import { useGlobals } from '../GlobalsContext';
 import { useBuildingDataSelects } from './Datas/DataBuildingSelectsContext';
 import { useCourseDataSelects } from './Datas/DataCourseSelectsContext';
 import { generate } from '../../services/ensalament';
@@ -38,6 +40,8 @@ const GenerateEnsalamentProvider: FC<GenerateEnsalamentProps> = ({
   const [data, setData] = useState<EnsalamentData>({} as EnsalamentData);
   const { childrenSelecteds: roomsIds } = useBuildingDataSelects();
   const { childrenSelecteds: teamsIds } = useCourseDataSelects();
+  const { error, success } = useNotification();
+  const { openBackdrop, closeBackdrop } = useGlobals();
 
   const converData = (response: EnsalamentReponse): EnsalamentData => {
     const datas = response.data.map(({ rooms, ...building }) => {
@@ -59,11 +63,17 @@ const GenerateEnsalamentProvider: FC<GenerateEnsalamentProps> = ({
   const getData = useCallback(
     async onSucess => {
       try {
+        openBackdrop();
         const dataResponse = await generate(roomsIds, teamsIds);
         setData(converData(dataResponse));
+        success({ message: 'Ensalamento gerado com sucesso' });
         onSucess();
       } catch (e) {
-        console.log(e);
+        error({
+          message: 'Ops, algo de errado aconteceu ao gerar o ensalamento',
+        });
+      } finally {
+        closeBackdrop();
       }
     },
     [data, roomsIds, teamsIds]

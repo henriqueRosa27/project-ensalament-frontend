@@ -36,7 +36,7 @@ export default function Team() {
         display: 'flex',
         flexDirection: 'column',
       }}>
-      <Typography variant="h4">Não Ensalado</Typography>
+      <Typography variant="h5">Não Ensalado</Typography>
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         {data.notEnsalate.map(team => (
           <TeamComponent
