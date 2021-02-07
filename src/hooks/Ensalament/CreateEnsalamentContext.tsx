@@ -11,6 +11,7 @@ import { useOptionWeekShift } from './OptionsWeekShiftContext';
 import { useNotification } from '../Notification';
 import { useGlobals } from '../GlobalsContext';
 import { save as saveData } from '../../services/ensalament';
+import history from '../../routes/history';
 
 interface CreateEnsalamentContextData {
   loading: boolean;
@@ -52,6 +53,7 @@ const SignUpProvider: FC<CreateEnsalamentProviderProps> = ({
       };
 
       await saveData(data);
+      history.push('/');
     } catch (e) {
       error({ message: 'Ops, algo deu errado ao salvar ensalamento' });
     } finally {
