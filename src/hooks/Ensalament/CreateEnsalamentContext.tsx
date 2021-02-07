@@ -8,6 +8,8 @@ import React, {
 
 import { useGenerateEnsalamentShift } from './GenerateEnsalamentContext';
 import { useOptionWeekShift } from './OptionsWeekShiftContext';
+import { useNotification } from '../Notification';
+import { useGlobals } from '../GlobalsContext';
 import { save as saveData } from '../../services/ensalament';
 
 interface CreateEnsalamentContextData {
@@ -29,11 +31,13 @@ const SignUpProvider: FC<CreateEnsalamentProviderProps> = ({
   const [loading, setLoading] = useState(false);
   const { data: dataSelected } = useGenerateEnsalamentShift();
   const { data: dataOption } = useOptionWeekShift();
+  const { error } = useNotification();
+  const { openBackdrop, closeBackdrop } = useGlobals();
 
   const save = async () => {
     try {
       setLoading(true);
-
+      openBackdrop();
       const data = {
         week: dataOption.week! - 1,
         shift: dataOption.shift! - 1,
@@ -49,9 +53,10 @@ const SignUpProvider: FC<CreateEnsalamentProviderProps> = ({
 
       await saveData(data);
     } catch (e) {
-      console.log(e);
+      error({ message: 'Ops, algo deu errado ao salvar ensalamento' });
     } finally {
       setLoading(false);
+      closeBackdrop();
     }
   };
   return (

@@ -98,7 +98,12 @@ const DataTableComponent: React.FC<DataTableComponent> = ({
   isLoading,
 }: DataTableComponent) => {
   return (
-    <div style={{ maxWidth: '100%' }}>
+    <div
+      style={{
+        maxWidth: '100%',
+        borderRadius: 20,
+        border: 'solid rgba(63, 81, 181, 0.4 )',
+      }}>
       <DataTable
         actions={actions}
         title={title}

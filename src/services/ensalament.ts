@@ -55,5 +55,16 @@ const getEnsalaments = async (): Promise<EnsalementResponse[]> => {
   const response = await axiosAutenticanted.get(`ensalament`);
   return response.data;
 };
+const deleteEnsalament = async (id: string): Promise<void> => {
+  const response = await axiosAutenticanted.delete(`ensalament/${id}`);
+  return response.data;
+};
 
-export { getCourses, getBuildings, generate, save, getEnsalaments };
+export {
+  getCourses,
+  getBuildings,
+  generate,
+  save,
+  getEnsalaments,
+  deleteEnsalament,
+};

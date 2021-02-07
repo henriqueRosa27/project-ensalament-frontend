@@ -9,6 +9,8 @@ import React, {
 
 import { useBuildingDataSelects } from './Datas/DataBuildingSelectsContext';
 import { useCourseDataSelects } from './Datas/DataCourseSelectsContext';
+import { useNotification } from '../Notification';
+import { useGlobals } from '../GlobalsContext';
 
 interface Data {
   week: number | undefined;
@@ -40,6 +42,8 @@ const ListGroupProvider: FC<OptionsWeekShiftProps> = ({
   );
   const { get: getCourse } = useCourseDataSelects();
   const { get: getBuilding } = useBuildingDataSelects();
+  const { error } = useNotification();
+  const { openBackdrop, closeBackdrop } = useGlobals();
 
   const changeData = useCallback(
     async value => {
@@ -50,11 +54,18 @@ const ListGroupProvider: FC<OptionsWeekShiftProps> = ({
     [status, data]
   );
 
-  const getDatas = () => {
-    const { shift, week } = data;
-    getCourse(week! - 1, shift! - 1);
-    getBuilding(week! - 1, shift! - 1);
-    setStatus('doneRequest');
+  const getDatas = async () => {
+    try {
+      openBackdrop();
+      const { shift, week } = data;
+      await getCourse(week! - 1, shift! - 1);
+      await getBuilding(week! - 1, shift! - 1);
+      setStatus('doneRequest');
+    } catch (e) {
+      error({ message: 'Ops, Algum erro ocorreu ao buscar dados' });
+    } finally {
+      closeBackdrop();
+    }
   };
 
   const statusOption = () => {

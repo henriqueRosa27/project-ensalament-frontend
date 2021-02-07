@@ -28,7 +28,7 @@ export default function Ensalament() {
                 width: 'auto',
                 overflowX: 'auto',
               }}>
-              <Typography variant="h4">{building.name}</Typography>
+              <Typography variant="h5">{building.name}</Typography>
               <div
                 style={{
                   display: 'flex',

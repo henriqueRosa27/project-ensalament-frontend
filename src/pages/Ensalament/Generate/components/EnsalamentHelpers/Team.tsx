@@ -36,8 +36,8 @@ export default function Team({
       isDragging={isDragging}
       ref={dragRef}
       style={{
-        margin: 10,
-        padding: 10,
+        margin: 5,
+        padding: 5,
         borderRadius: 10,
         borderColor: '#000',
       }}>
