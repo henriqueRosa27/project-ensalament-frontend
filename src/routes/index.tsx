@@ -13,6 +13,8 @@ import { BuildingList, BuildingForm } from '../pages/Building';
 import { RoomList, RoomForm } from '../pages/Room';
 import { CourseList, CourseForm } from '../pages/Course';
 import { TeamList, TeamForm } from '../pages/Team';
+import EnsalamentByid from '../pages/Ensalament/ById';
+import EnsalamentDetails from '../pages/Ensalament/Details';
 import Tests from '../pages/_Tests';
 import { BackDropComponent } from '../components';
 import { useAuth } from '../hooks/AuthContext';
@@ -35,6 +37,16 @@ const Routes: React.FC = () => {
                   exact
                   path="/ensalamento/gerar"
                   component={GenerateEnsalamentPage}
+                />
+                <PrivateRoute
+                  exact
+                  path="/ensalamento/detalhado"
+                  component={EnsalamentDetails}
+                />
+                <PrivateRoute
+                  exact
+                  path="/ensalamento/show/:id"
+                  component={EnsalamentByid}
                 />
 
                 <PrivateRoute exact path="/predio" component={BuildingList} />

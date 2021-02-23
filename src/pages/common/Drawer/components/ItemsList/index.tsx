@@ -20,6 +20,11 @@ const itemsList: Array<ItemList> = [
     icon: <Dashboard />,
   },
   {
+    label: 'Ensalamento Detalhado',
+    path: '/ensalamento/detalhado',
+    icon: <Dashboard />,
+  },
+  {
     label: 'Prédios',
     path: '/predio',
     icon: <Business />,

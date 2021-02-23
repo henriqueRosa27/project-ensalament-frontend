@@ -1,8 +1,6 @@
 import React from 'react';
-import { IconButton } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
 
-import { DeleteDataRow } from './helpers';
+import { DeleteDataRow, EditDatRow } from './helpers';
 import { shiftOptions, weekOptions } from '../../../Models/WeekShift';
 
 const Columns = [
@@ -37,7 +35,12 @@ const Columns = [
 
   {
     name: 'Ações',
-    cell: (row: any) => <DeleteDataRow id={row.id} />,
+    cell: (row: any) => (
+      <>
+        <EditDatRow id={row.id} />
+        <DeleteDataRow id={row.id} />
+      </>
+    ),
     sortable: false,
     ignoreRowClick: true,
     allowOverflow: true,
