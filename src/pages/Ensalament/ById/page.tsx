@@ -80,11 +80,23 @@ export default function () {
             {data.buildings?.map(building => (
               <>
                 <Box m={2} />
-                <Typography component="h5" variant="h5" align="center">
-                  {building.name}
-                </Typography>
                 <Table key={building.id}>
-                  <TableHead>
+                  <TableHead
+                    style={{
+                      backgroundColor: '#dce5e8',
+                    }}>
+                    <TableRow>
+                      <TableCell align="center" colSpan={4}>
+                        <Typography component="h5" variant="h5" align="center">
+                          {building.name}
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableHead
+                    style={{
+                      backgroundColor: '#dce5e8',
+                    }}>
                     <TableRow>
                       <TableCell align="center">Nome</TableCell>
                       <TableCell align="center">Capacidade</TableCell>

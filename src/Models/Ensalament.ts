@@ -52,6 +52,10 @@ export interface EnsalamentDetail extends CourseDefault {
 }
 
 interface TeamToDetail extends Team {
+  rooms: RoomToDetail[];
+}
+
+interface RoomToDetail extends Team {
   room: RoomDefault;
 
   week: number;

@@ -69,7 +69,7 @@ const getEnsalamentByid = async (id: string): Promise<EnsalamentById> => {
   return response.data;
 };
 
-const getEnsalamentDetails = async (): Promise<EnsalamentDetail> => {
+const getEnsalamentDetails = async (): Promise<EnsalamentDetail[]> => {
   const response = await axiosAutenticanted.get(`ensalament/details`);
   return response.data;
 };

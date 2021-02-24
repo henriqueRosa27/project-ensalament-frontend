@@ -15,7 +15,7 @@ import { useGlobals } from '../GlobalsContext';
 
 interface EnsalamentDetailsContextData {
   loading: boolean;
-  data: EnsalamentDetail;
+  data: EnsalamentDetail[];
   loadData(): Promise<void>;
 }
 
@@ -31,7 +31,7 @@ const EnsalamentDetailsProvider: FC<EnsalamentDetailsContextProps> = ({
   children,
 }: EnsalamentDetailsContextProps) => {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<EnsalamentDetail>({} as EnsalamentDetail);
+  const [data, setData] = useState<EnsalamentDetail[]>([]);
   const { error } = useNotification();
 
   const { openBackdrop, closeBackdrop } = useGlobals();
