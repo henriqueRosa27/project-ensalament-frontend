@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-// const LOCAL_URL = 'http://localhost:3333/';
-const REMOTE_URL = 'https://ensalamento.herokuapp.com/';
+// const URL = 'http://localhost:3333/';
+const URL = 'https://ensalamento.herokuapp.com/';
 
 const api = axios.create({
-  baseURL: REMOTE_URL,
+  baseURL: URL,
 });
 
 const autenticanted = {};

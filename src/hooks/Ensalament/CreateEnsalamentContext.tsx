@@ -26,7 +26,7 @@ const CreateEnsalamentContext = createContext<CreateEnsalamentContextData>(
   {} as CreateEnsalamentContextData
 );
 
-const SignUpProvider: FC<CreateEnsalamentProviderProps> = ({
+const CreateEnsalamentProvider: FC<CreateEnsalamentProviderProps> = ({
   children,
 }: CreateEnsalamentProviderProps) => {
   const [loading, setLoading] = useState(false);
@@ -78,4 +78,4 @@ export function useCreateEnsalament(): CreateEnsalamentContextData {
   return context;
 }
 
-export default SignUpProvider;
+export default CreateEnsalamentProvider;
